@@ -1,5 +1,6 @@
 import {Wordmark} from "../ui/Wordmark.tsx";
 import navLinks from "../../data/navLinks.ts";
+import {FlipLink} from "../ui/FlipLink.tsx";
 
 export const Navbar = () => {
 	return (
@@ -16,13 +17,13 @@ export const Navbar = () => {
 							</a>
 						</div>
 					</div>
-					<ul className={"flex gap-4 text-[11px] font-semibold"}>
+					<div className={"flex gap-4 text-[10px] font-semibold"}>
 						{navLinks.map(({label, href}) => (
-							<li key={href} className={"uppercase scale-y-105 border-b-[1.5px] border-dashed"}>
-								<a href={href}>{label}</a>
-							</li>
+							<FlipLink key={href} href={href}>
+								{label}
+							</FlipLink>
 						))}
-					</ul>
+					</div>
 				</nav>
 			</header>
 		</>

@@ -8,6 +8,17 @@
     --color-driftwood: #6c5f51;
     --color-ember-accent: #dc5000;
     --color-pure-black: #000000;
+
+    --dashline-color: var(--color-warm-cream);
+    --color-white-transparent: color-mix(in srgb, var(--color-warm-cream) 20%, transparent);
+}
+
+@utility dashline {
+    background-image: repeating-linear-gradient(
+            90deg,
+            var(--dashline-color) 0 2px,
+            var(--color-white-transparent) 0 4px
+    );
 }
 
 /* work-sans-100 - latin */
