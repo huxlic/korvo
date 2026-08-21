@@ -4,7 +4,7 @@ const App = () => {
 	return (
 		<>
 			<div
-				className={"font-outfit text-warm-cream selection:bg-ember-accent"}>
+				className={"font-work-sans text-warm-cream selection:bg-ember-accent"}>
 				<Navbar/>
 			</div>
 		</>
