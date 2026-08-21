@@ -1,5 +1,6 @@
 import {Canvas} from "@react-three/fiber";
 import {OrbitControls} from "@react-three/drei";
+import Cork from "../models/Cork.tsx";
 
 export const Hero = () => {
 	return (
@@ -8,7 +9,7 @@ export const Hero = () => {
 				<Canvas>
 					<ambientLight intensity={0.6}/>
 					<directionalLight position={[3, 5, 2]} intensity={1.5}/>
-					{/*<Cork scale={.3} />*/}
+					<Cork scale={.32} />
 					<OrbitControls enableRotate={true} enableZoom={false} />
 				</Canvas>
 			</section>
