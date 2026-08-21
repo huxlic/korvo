@@ -1,11 +1,13 @@
 import {Navbar} from "./components/sections/Navbar.tsx";
+import {Hero} from "./components/sections/Hero.tsx";
 
 const App = () => {
 	return (
 		<>
 			<div
-				className={"w-full font-work-sans text-warm-cream selection:bg-ember-accent h-[500vh]"}>
+				className={"w-full font-work-sans text-warm-cream selection:bg-ember-accent"}>
 				<Navbar/>
+				<Hero/>
 			</div>
 		</>
 	)

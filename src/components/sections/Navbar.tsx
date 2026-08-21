@@ -5,7 +5,7 @@ import {FlipLink} from "../ui/FlipLink.tsx";
 export const Navbar = () => {
 	return (
 		<>
-			<header className={"px-10 py-6"}>
+			<header className={"px-10 py-6 fixed top-0 w-full"}>
 				
 				<nav className={"flex justify-between items-center box-border"}>
 					<div className="relative">
