@@ -32,7 +32,7 @@ const App = () => {
 			<div
 				id="smooth-wrapper"
 			>
-				<div id="smooth-content" className="w-full h-[500vh]">
+				<div id="smooth-content" className="w-full">
 					<Hero />
 				</div>
 			</div>
