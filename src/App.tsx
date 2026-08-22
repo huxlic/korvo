@@ -5,7 +5,7 @@ const App = () => {
 	return (
 		<>
 			<div
-				className={"w-full font-work-sans text-warm-cream selection:bg-ember-accent"}>
+				className={"w-full h-[500vh] font-work-sans text-warm-cream selection:bg-ember-accent"}>
 				<Navbar/>
 				<Hero/>
 			</div>
