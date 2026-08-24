@@ -1,4 +1,4 @@
-import Cork from "./models/Cork.tsx";
+import Cork from "./Cork.tsx";
 import {useRef} from "react";
 import * as THREE from "three";
 import {useGSAP} from "@gsap/react";
@@ -8,15 +8,31 @@ const AnimatedCork = () => {
 	const corkRef = useRef<THREE.Group>(null!);
 	
 	useGSAP(() => {
-		gsap.to(corkRef.current.rotation, {
-			y: Math.PI * 2,
+		const tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: "#hero",
 				start: "top top",
-				end: "+=1000",
+				end: "bottom bottom",
 				scrub: 1,
 			},
 		});
+		
+		tl.to(corkRef.current.scale, {
+				x: 0.4,
+				y: 0.4,
+				duration: 1,
+			})
+			.to(corkRef.current.rotation, {
+				x: -Math.PI * 2,
+				y: -Math.PI * 2,
+				duration: 1,
+			})
+			.to(corkRef.current.scale, {
+				x: 0.6,
+				y: 0.6,
+				duration: 1,
+			}, "<");
+		
 	}, []);
 	
 	return (

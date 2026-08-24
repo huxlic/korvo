@@ -16,7 +16,7 @@ export const Navbar = () => {
 		const wordmark = wordmarkRef.current;
 		const dot = dotRef.current;
 		
-		const split = SplitText.create(".text", {
+		const text = SplitText.create(".text", {
 			type: "words",
 			charsClass: "inline-block",
 		});
@@ -26,17 +26,20 @@ export const Navbar = () => {
 				scrollTrigger: {
 					trigger: "#hero",
 					start: "top top",
-					end: "+=500",
+					end: "+=1000",
 					scrub: true
 				},
 				
 			},
 		});
 		
-		tl.to(split.words, {
+		tl.to(text.words, {
 				yPercent: -100,
 				stagger: 0.05,
 				duration: 1,
+			})
+			.to(text.words, {
+				display: "none"
 			})
 			.to(
 				wordmark,
@@ -47,9 +50,11 @@ export const Navbar = () => {
 					yPercent: -50,
 					duration: 1,
 					ease: "power2.inOut",
+					delay: 1
 				}
 			)
-			.to(dot,
+			.to(
+				dot,
 				{
 					width: 0,
 					height: 0,
@@ -68,7 +73,7 @@ export const Navbar = () => {
 							mugs. Built for tables.</p>
 						
 						<a ref={wordmarkRef} className={"absolute top-10 w-137.5"} href="#hero">
-							<Wordmark />
+							<Wordmark/>
 						</a>
 					</div>
 					<div className={"flex gap-4 text-[10px] font-semibold"}>
