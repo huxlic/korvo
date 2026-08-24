@@ -12,12 +12,12 @@ const App = () => {
 	
 	return (
 		<div className="relative w-full font-work-sans text-warm-cream selection:bg-ember-accent">
-			<Navbar />
+			<Navbar/>
 			<div
 				id="smooth-wrapper"
 			>
-				<div id="smooth-content" className="w-full">
-					<Hero />
+				<div id="smooth-content" className="w-full ">
+					<Hero/>
 				</div>
 			</div>
 		</div>

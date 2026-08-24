@@ -13,6 +13,7 @@ export const Hero = () => {
 			charsClass: "w-max"
 		})
 		
+		
 		const tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: "#hero",
@@ -32,7 +33,9 @@ export const Hero = () => {
 				opacity: 0,
 				stagger: 0.05
 			}, "<")
-		// .to()
+			.to(heroCopy.elements, {
+				display: "none"
+			})
 		
 		
 	}, [])
@@ -43,17 +46,30 @@ export const Hero = () => {
 				className={"sticky top-0 h-screen bg-cover bg-bottom-right "}
 				style={{backgroundImage: `url(${cutting_mat})`}}
 			>
+				<div
+					className="absolute z-10 mx-10 left-0 bottom-6 w-60 h-70 bg-linear-to-br from-white/15 to-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.15)] border border-[#FFFFFF26] backdrop-blur-lg backdrop-saturate-100 ">
+				</div>
+				
 				<div id="hero-content" className="absolute inset-0 flex items-center justify-between px-10">
-					<div
-						className="glass-card w-100 h-100 border border-[#FFFFFF26] backdrop-blur-lg backdrop-saturate-100 ">
-					
-					</div>
-					
 					<p id="hero-copy"
-					   className={"w-105 text-[20px] lg:text-[24px] font-medium tracking-tighter"}>Designed to lift,
+					   className={"absolute z-10 right-10 w-105 text-[20px] lg:text-[24px] font-medium tracking-tighter"}>Designed
+						to
+						lift,
 						insulate, and grip in all
 						the right ways. Korvo makes the
 						simplest moment feel considered.</p>
+					
+					<div className="hidden w-full flex justify-between items-center">
+						<h2 className={"uppercase text-[36px] font-semibold tracking-tighter"}>isn’t just
+							a coaster.</h2>
+						
+						<p>
+							Korvo isn’t just a
+							coaster. It’s the result
+							of unprecedented AI*
+							breakthroughs.
+						</p>
+					</div>
 				</div>
 				
 				<Canvas className={""}>
