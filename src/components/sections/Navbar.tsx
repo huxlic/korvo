@@ -9,12 +9,13 @@ import {useRef} from "react";
 gsap.registerPlugin(SplitText);
 
 export const Navbar = () => {
-	const wordmarkRef = useRef(null);
+	const wordmarkRef = useRef<HTMLAnchorElement | null>(null);
 	const dotRef = useRef<HTMLDivElement | null>(null);
 	
 	useGSAP(() => {
-		const wordmark = wordmarkRef.current;
-		const dot = dotRef.current;
+		const wordmark: HTMLElement | null = wordmarkRef.current;
+		const dot: HTMLDivElement | null = dotRef.current;
+		if (!wordmark || !dot) return;
 		
 		const text = SplitText.create(".text", {
 			type: "words",
@@ -27,7 +28,8 @@ export const Navbar = () => {
 					trigger: "#hero",
 					start: "top top",
 					end: "+=1000",
-					scrub: true
+					scrub: true,
+					invalidateOnRefresh: true,
 				},
 				
 			},
@@ -44,10 +46,10 @@ export const Navbar = () => {
 			.to(
 				wordmark,
 				{
-					width: 94,
-					left: 0,
+					scale: () => 94 / wordmark.offsetWidth,
 					top: "50%",
 					yPercent: -50,
+					transformOrigin: "left top",
 					duration: 1,
 					ease: "power2.inOut",
 					delay: 1
@@ -72,10 +74,11 @@ export const Navbar = () => {
 							mugs. Built for tables.
 						</p>
 						
-						<a ref={wordmarkRef} className="absolute top-0 md:top-8 lg:top-10"
-						   style={{width: 'clamp(326px, 45vw, 550px)'}} href="#hero">
-							<Wordmark/>
-						</a>
+						<div className="absolute top-6 md:top-8 lg:top-10 w-full">
+							<a ref={wordmarkRef} href="#hero" className="block w-full ">
+								<Wordmark/>
+							</a>
+						</div>
 					</div>
 					<div className={"flex gap-4 text-[7px] md:text-[8px] lg:text-[10px] font-semibold"}>
 						{navLinks.map(({label, href}) => (
