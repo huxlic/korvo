@@ -15,7 +15,7 @@ html, body, #root {
     --color-pure-black: #000000;
 
     --dashline-color: var(--color-warm-cream);
-    --color-white-transparent: color-mix(in srgb, var(--color-warm-cream) 20%, transparent);
+    --color-white-transparent: color-mix(in srgb, var(--color-warm-cream) 0%, transparent);
 }
 
 @utility dashline {
@@ -34,6 +34,7 @@ html, body, #root {
     font-weight: 100;
     src: url('/fonts/work-sans/work-sans-v24-latin-100.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* work-sans-200 - latin */
 @font-face {
     font-display: swap;
@@ -42,6 +43,7 @@ html, body, #root {
     font-weight: 200;
     src: url('/fonts/work-sans/work-sans-v24-latin-200.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* work-sans-300 - latin */
 @font-face {
     font-display: swap;
@@ -50,6 +52,7 @@ html, body, #root {
     font-weight: 300;
     src: url('/fonts/work-sans/work-sans-v24-latin-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* work-sans-regular - latin */
 @font-face {
     font-display: swap;
@@ -58,6 +61,7 @@ html, body, #root {
     font-weight: 400;
     src: url('/fonts/work-sans/work-sans-v24-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* work-sans-500 - latin */
 @font-face {
     font-display: swap;
@@ -66,6 +70,7 @@ html, body, #root {
     font-weight: 500;
     src: url('/fonts/work-sans/work-sans-v24-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* work-sans-600 - latin */
 @font-face {
     font-display: swap;
@@ -74,6 +79,7 @@ html, body, #root {
     font-weight: 600;
     src: url('/fonts/work-sans/work-sans-v24-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* work-sans-700 - latin */
 @font-face {
     font-display: swap;
@@ -82,6 +88,7 @@ html, body, #root {
     font-weight: 700;
     src: url('/fonts/work-sans/work-sans-v24-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* work-sans-800 - latin */
 @font-face {
     font-display: swap;
@@ -90,6 +97,7 @@ html, body, #root {
     font-weight: 800;
     src: url('/fonts/work-sans/work-sans-v24-latin-800.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* work-sans-900 - latin */
 @font-face {
     font-display: swap;
@@ -118,4 +126,13 @@ html {
 ::-webkit-scrollbar-thumb {
     background-color: var(--color-warm-cream);
     border-radius: 0;
+}
+
+.glass-card {
+    background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0.05) 100%
+    );
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
