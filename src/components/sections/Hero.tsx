@@ -17,7 +17,7 @@ export const Hero = () => {
 			scrollTrigger: {
 				trigger: "#hero",
 				start: "top top",
-				end: "+=5000",
+				end: "+=1000",
 				scrub: 1,
 			}
 		});
@@ -26,16 +26,13 @@ export const Hero = () => {
 				backgroundColor: "#1A1513",
 				backdropFilter: "blur(4px)"
 			})
-			.to(heroCopy.chars, {
-				scale: 1.5,
-				stagger: 0.025
-			})
 			.to(heroCopy.lines, {
 				x: 40,
 				filter: "blur(8px)",
 				opacity: 0,
-				stagger: 0.1
+				stagger: 0.05
 			}, "<")
+		// .to()
 		
 		
 	}, [])
@@ -48,7 +45,8 @@ export const Hero = () => {
 			>
 				<div id="hero-content" className="absolute inset-0 flex items-center justify-between px-10">
 					<div className=""></div>
-					<p id="hero-copy" className={"w-105 text-[24px] font-medium tracking-tighter"}>Designed to lift,
+					<p id="hero-copy"
+					   className={"w-105 text-[20px] lg:text-[24px] font-medium tracking-tighter"}>Designed to lift,
 						insulate, and grip in all
 						the right ways. Korvo makes the
 						simplest moment feel considered.</p>
