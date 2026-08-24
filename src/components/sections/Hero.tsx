@@ -10,7 +10,18 @@ export const Hero = () => {
 	useGSAP(() => {
 		const heroCopy = SplitText.create("#hero-copy", {
 			type: "chars, lines",
-			charsClass: "w-max"
+		})
+		
+		const heroCardHeader = SplitText.create("#hero-card-header", {
+			type: "lines",
+			linesClass: "line",
+			mask: "lines"
+		})
+		const heroCardDesc = SplitText.create("#hero-card-desc", {
+			type: "lines",
+			linesClass: "line",
+			// autoSplit: true,
+			mask: "lines"
 		})
 		
 		
@@ -33,6 +44,28 @@ export const Hero = () => {
 				opacity: 0,
 				stagger: 0.05
 			}, "<")
+			.to(heroCardHeader.lines, {
+				yPercent: 100,
+				stagger: {
+					each: 0.05,
+					from: "end"
+				},
+				duration: 1,
+				ease: "expo.out"
+			})
+			.to(heroCardDesc.lines, {
+				yPercent: 100,
+				stagger: {
+					each: 0.05,
+					from: "end"
+				},
+				ease: "expo.out",
+				duration: 1,
+			}, "<")
+			.to("#dashline", {
+				width: 0,
+				ease: "expo.out"
+			}, "<")
 			.to(heroCopy.elements, {
 				display: "none"
 			}).to("#ai-hype", {
@@ -49,15 +82,19 @@ export const Hero = () => {
 				style={{backgroundImage: `url(${cutting_mat})`}}
 			>
 				<div
-					className="flex flex-col justify-between absolute z-10 mx-10 left-0 box-border px-3 py-3 lg:px-4 lg:py-5 bottom-6 w-43.25 lg:w-60 bg-linear-to-br from-white/15 to-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.15)] border border-[#FFFFFF26] backdrop-blur-lg backdrop-saturate-100 ">
-					<p className={"text-[16px] lg:text-[21px] pb-[25%] uppercase font-semibold scale-y-105 tracking-tighter leading-4.5 lg:leading-6"}>lusion's
+					className="flex flex-col justify-between absolute z-10 ml-8 lg:ml-10 left-0 bottom-4 lg:bottom-6 box-border px-3 py-3 lg:px-4 lg:py-5 w-43.25 lg:w-60 bg-linear-to-br from-white/15 to-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.15)] border border-[#FFFFFF26] backdrop-blur-lg backdrop-saturate-100 ">
+					<p id="hero-card-header" aria-label={"lusion's design, deconstructed, studied and rebuilt by hux."}
+					   className={"text-[16px] h-max lg:text-[20px] pb-[25%] uppercase font-semibold scale-y-105 tracking-tighter leading-4.5 lg:leading-6 overflow-hidden"}>lusion's
 						design,
-						reverse-engineered
-						and rebuilt by hux.</p>
+						deconstructed, studied
+						and rebuilt by hux.
+					</p>
 					
-					<span className="w-full h-px dashline"/>
+					<span id="dashline" className="w-full h-px dashline"/>
 					
-					<p className={"text-end text-[11px] lg:text-[15px] pt-[10%] font-medium tracking-tighter"}>Quite
+					<p id="hero-card-desc"
+					   className={"text-end text-[11px] lg:text-[15px] pt-[10%] font-medium tracking-tighter"}
+					   aria-label={"Quite possibly the most unnecessarily advanced coaster."}>Quite
 						possibly the most
 						unnecessarily
 						advanced coaster.</p>
