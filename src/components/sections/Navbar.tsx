@@ -69,9 +69,8 @@ export const Navbar = () => {
 				<nav className={"flex justify-between items-center box-border"}>
 					<div className="relative" style={{width: 'clamp(326px, 45vw, 550px)'}}>
 						<div className="w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full bg-warm-cream" ref={dotRef}/>
-						<p className={"text text-[10px] md:text-[13px] lg:text-[16px] absolute right-0 top-full w-max uppercase font-semibold tracking-tighter overflow-hidden "}>Made
-							for
-							mugs. Built for tables.
+						<p className={"text text-[10px] md:text-[13px] lg:text-[16px] absolute right-0 top-full w-max uppercase font-semibold tracking-tighter overflow-hidden "}
+						   aria-label={"Trained on stains. Deployed on tables."}>Trained on stains. Deployed on tables.
 						</p>
 						
 						<div className="absolute top-6 md:top-8 lg:top-10 w-full">
