@@ -29,7 +29,6 @@ export const Hero = () => {
 		const heroCardDesc = SplitText.create("#hero-card-desc", {
 			type: "lines",
 			linesClass: "line",
-			// autoSplit: true,
 			mask: "lines"
 		})
 		
@@ -82,14 +81,6 @@ export const Hero = () => {
 			.to(heroCopy.elements, {
 				display: "none"
 			})
-			.from("#hype-title", {
-				yPercent: -30,
-				ease: "circ.inOut"
-			})
-			.from("#hype-desc", {
-				yPercent: 30,
-				ease: "circ.inOut"
-			}, "<")
 			.to(hypeTitle.chars, {
 				opacity: 1,
 				stagger: {
@@ -97,7 +88,7 @@ export const Hero = () => {
 					from: "end"
 				},
 				ease: "circ.in"
-			}, "<")
+			})
 			.to(hypeDesc.chars, {
 				opacity: 1,
 				stagger: {
@@ -106,6 +97,27 @@ export const Hero = () => {
 				},
 				ease: "circ.in"
 			}, "<")
+			.from("#hype-title", {
+				yPercent: -30,
+				ease: "circ.inOut"
+			}, "<")
+			.from("#hype-desc", {
+				yPercent: 30,
+				ease: "circ.inOut"
+			}, "<")
+			.to("#hype-title", {
+				opacity: 0,
+				yPercent: 30,
+				ease: "circ.inOut"
+			}, "<2")
+			.to("#hype-desc", {
+				opacity: 0,
+				yPercent: -30,
+				ease: "circ.inOut"
+			}, "<")
+			.to("#hero-content", {
+				backgroundImage: "linear-gradient(to right, #1A1513, #DD5000)"
+			})
 		
 		
 	}, [])
