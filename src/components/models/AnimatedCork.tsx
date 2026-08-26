@@ -31,8 +31,12 @@ const AnimatedCork = () => {
 				x: 0.6,
 				y: 0.6,
 				duration: 1,
-			}, "<");
-		
+			}, "<")
+			.to(corkRef.current.scale, {
+				x: 0.2,
+				y: 0.2,
+				duration: 1,
+			});
 	}, []);
 	
 	return (

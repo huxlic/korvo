@@ -9,7 +9,16 @@ export const Hero = () => {
 	
 	useGSAP(() => {
 		const heroCopy = SplitText.create("#hero-copy", {
-			type: "chars, lines",
+			type: "chars, lines, words",
+		})
+		
+		const hypeTitle = SplitText.create("#hype-title", {
+			type: "chars",
+			charsClass: "opacity-0 inline-block",
+		})
+		const hypeDesc = SplitText.create("#hype-desc", {
+			type: "chars, words",
+			charsClass: "opacity-0 inline-block",
 		})
 		
 		const heroCardHeader = SplitText.create("#hero-card-header", {
@@ -51,7 +60,7 @@ export const Hero = () => {
 					from: "end"
 				},
 				duration: 1,
-				ease: "back.out"
+				ease: "c"
 			})
 			.to(heroCardDesc.lines, {
 				yPercent: 100,
@@ -59,22 +68,44 @@ export const Hero = () => {
 					each: 0.05,
 					from: "end"
 				},
-				ease: "back.out",
+				ease: "c",
 				duration: 1,
 			}, "<")
 			.to("#dashline", {
 				width: 0,
-				ease: "back.out"
+				ease: "circ.in"
 			}, "<")
 			.to("#hero-card", {
 				opacity: 0,
 				display: "none",
-			}, "<")
+			}, "<50%")
 			.to(heroCopy.elements, {
 				display: "none"
-			}).to("#ai-hype", {
-			opacity: 1,
-		})
+			})
+			.from("#hype-title", {
+				yPercent: -30,
+				ease: "circ.inOut"
+			})
+			.from("#hype-desc", {
+				yPercent: 30,
+				ease: "circ.inOut"
+			}, "<")
+			.to(hypeTitle.chars, {
+				opacity: 1,
+				stagger: {
+					each: 0.025,
+					from: "end"
+				},
+				ease: "circ.in"
+			}, "<")
+			.to(hypeDesc.chars, {
+				opacity: 1,
+				stagger: {
+					each: 0.025,
+					from: "end"
+				},
+				ease: "circ.in"
+			}, "<")
 		
 		
 	}, [])
@@ -112,13 +143,17 @@ export const Hero = () => {
 						to lift, insulate, and grip in real time. Korvo makes the mundane feel groundbreaking.</p>
 					
 					<div id="ai-hype"
-					     className="absolute right-10 left-10 z-20 flex justify-between items-center opacity-0 px-20">
-						<h2 className={"w-62 uppercase text-[45px] font-semibold tracking-tighter leading-11 scale-y-105"}
-						    aria-label={"isn’t just a coaster."}>isn’t just
+					     className="absolute right-10 left-10 z-20 flex justify-between items-center px-20">
+						<h2
+							id="hype-title"
+							className={"w-62 uppercase text-[45px] font-semibold tracking-tighter leading-11 scale-y-105"}
+							aria-label={"isn’t just a coaster."}>isn’t just
 							a coaster.</h2>
 						
-						<p className={"w-65 text-[25px] leading-8 tracking-tighter font-medium scale-y-105"}
-						   aria-label={"Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure."}>
+						<p
+							id="hype-desc"
+							className={"w-65 text-[25px] leading-8 tracking-tighter font-medium scale-y-105"}
+							aria-label={"Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure."}>
 							Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure.
 						</p>
 					</div>
