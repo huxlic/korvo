@@ -51,7 +51,7 @@ export const Hero = () => {
 					from: "end"
 				},
 				duration: 1,
-				ease: "expo.out"
+				ease: "back.out"
 			})
 			.to(heroCardDesc.lines, {
 				yPercent: 100,
@@ -59,12 +59,16 @@ export const Hero = () => {
 					each: 0.05,
 					from: "end"
 				},
-				ease: "expo.out",
+				ease: "back.out",
 				duration: 1,
 			}, "<")
 			.to("#dashline", {
 				width: 0,
-				ease: "expo.out"
+				ease: "back.out"
+			}, "<")
+			.to("#hero-card", {
+				opacity: 0,
+				display: "none",
 			}, "<")
 			.to(heroCopy.elements, {
 				display: "none"
@@ -82,6 +86,7 @@ export const Hero = () => {
 				style={{backgroundImage: `url(${cutting_mat})`}}
 			>
 				<div
+					id="hero-card"
 					className="flex flex-col justify-between absolute z-10 ml-8 lg:ml-10 left-0 bottom-4 lg:bottom-6 box-border px-3 py-3 lg:px-4 lg:py-5 w-43.25 lg:w-60 bg-linear-to-br from-white/15 to-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.15)] border border-[#FFFFFF26] backdrop-blur-lg backdrop-saturate-100 ">
 					<p id="hero-card-header" aria-label={"lusion's design, deconstructed, studied and rebuilt by hux."}
 					   className={"text-[16px] h-max lg:text-[20px] pb-[25%] uppercase font-semibold scale-y-105 tracking-tighter leading-4.5 lg:leading-6 overflow-hidden"}>lusion's
@@ -108,15 +113,16 @@ export const Hero = () => {
 					
 					<div id="ai-hype"
 					     className="absolute right-10 left-10 z-20 flex justify-between items-center opacity-0 px-20">
-						<h2 className={"uppercase text-[45px] font-semibold tracking-tighter leading-11 scale-y-105"}
+						<h2 className={"w-62 uppercase text-[45px] font-semibold tracking-tighter leading-11 scale-y-105"}
 						    aria-label={"isn’t just a coaster."}>isn’t just
 							a coaster.</h2>
 						
-						<p className={"text-[25px] tracking-tighter font-medium scale-y-105"}
+						<p className={"w-65 text-[25px] leading-8 tracking-tighter font-medium scale-y-105"}
 						   aria-label={"Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure."}>
 							Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure.
 						</p>
 					</div>
+				
 				</div>
 				
 				<Canvas className={""}>
