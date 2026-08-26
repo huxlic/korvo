@@ -5,10 +5,13 @@ import {gsap} from "gsap";
 import {SplitText} from "gsap/SplitText";
 import {useGSAP} from "@gsap/react";
 import {useRef} from "react";
+import useOpenMenu from "../../store/store.ts";
 
 gsap.registerPlugin(SplitText);
 
 export const Navbar = () => {
+	const {isOpen, setIsOpen} = useOpenMenu();
+	
 	const wordmarkRef = useRef<HTMLAnchorElement | null>(null);
 	const dotRef = useRef<HTMLDivElement | null>(null);
 	
@@ -68,24 +71,35 @@ export const Navbar = () => {
 			<header className={"px-8 lg:px-10 py-4 lg:py-6 fixed top-0 w-full z-50"}>
 				<nav className={"flex justify-between items-center box-border"}>
 					<div className="relative" style={{width: 'clamp(326px, 45vw, 550px)'}}>
-						<div className="w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full bg-warm-cream" ref={dotRef}/>
+						<div className="hidden md:block w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full bg-warm-cream"
+						     ref={dotRef}/>
 						<p className={"text text-[10px] md:text-[13px] lg:text-[16px] absolute right-0 top-full w-max uppercase font-semibold tracking-tighter overflow-hidden "}
 						   aria-label={"Trained on stains. Deployed on tables."}>Trained on stains. Deployed on tables.
 						</p>
 						
-						<div className="absolute top-6 md:top-8 lg:top-10 w-full">
+						<div className="absolute z-60 top-6 md:top-8 lg:top-10 w-full">
 							<a ref={wordmarkRef} href="#hero" className="block w-full ">
 								<Wordmark/>
 							</a>
 						</div>
 					</div>
-					<div className={"flex gap-4 text-[7px] md:text-[8px] lg:text-[10px] font-semibold"}>
+					
+					<div className={"hidden md:flex gap-4 text-[7px] md:text-[8px] lg:text-[10px] font-semibold"}>
 						{navLinks.map(({label, href}) => (
 							<FlipLink key={href} href={href}>
 								{label}
 							</FlipLink>
 						))}
 					</div>
+					
+					<button
+						onClick={() => setIsOpen(!isOpen)}
+						className={`flex items-center gap-2 ${isOpen ? "bg-warm-cream text-walnut-shadow " : "border-dotted"} md:hidden px-[1.75em] py-[1em] border-[1.4px] rounded-full cursor-pointer transition-all duration-200`}>
+						<div
+							className={`w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full ${isOpen ? "bg-walnut-shadow" : "bg-warm-cream"}`}/>
+						<p className={"uppercase text-[20px] font-semibold tracking-tighter scale-y-105"}>{isOpen ? "Close" : "Menu"}
+						</p>
+					</button>
 				</nav>
 			</header>
 		</>
