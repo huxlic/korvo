@@ -1,30 +1,27 @@
 import navLinks from "../../data/navLinks.ts";
-import useOpenMenu from "../../store/store.ts";
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
+import useMenuStore from "../../store/useMenuStore.ts";
 
 export const MdLinks = () => {
-	const {isOpen, setIsOpen} = useOpenMenu();
+	const {toggleMenu} = useMenuStore();
 	
 	useGSAP(() => {
 		gsap.from("#md-links", {
 			xPercent: 100,
 		})
+		
 	}, {})
 	
-	// const revealTween = gsap.from("#md-links", {
-	// 	xPercent: 100,
-	// 	paused: true,
-	// });
 	return (
 		<div className={"md:hidden grid grid-cols-4 fixed z-60 inset-0 bg-[#201914bf]"}>
-			<div onClick={() => setIsOpen(!isOpen)}/>
+			<div onClick={toggleMenu}/>
 			<div id="md-links" className="flex flex-col justify-between bg-walnut-shadow col-span-3 px-10 py-8">
 				<div/>
 				<div className={"flex flex-col gap-6 uppercase text-[73px] font-semibold tracking-tighter"}>
 					{
 						navLinks.map(({label, href}) => (
-							<li className={"relative w-max list-none leading-none"} onClick={() => setIsOpen(!isOpen)}
+							<li className={"relative w-max list-none leading-none"} onClick={toggleMenu}
 							    key={label}>
 								<a href={href}>
 									{label}

@@ -5,13 +5,13 @@ import {gsap} from "gsap";
 import {SplitText} from "gsap/SplitText";
 import {useGSAP} from "@gsap/react";
 import {useRef} from "react";
-import useOpenMenu from "../../store/store.ts";
 import {useMediaQuery} from "react-responsive";
+import useMenuStore from "../../store/useMenuStore.ts";
 
 gsap.registerPlugin(SplitText);
 
 export const Navbar = () => {
-	const {isOpen, setIsOpen} = useOpenMenu();
+	const {isMenuOpen, toggleMenu} = useMenuStore();
 	
 	const isSmDown = useMediaQuery({maxWidth: 639});
 	const isMdDown = useMediaQuery({maxWidth: 768});
@@ -101,14 +101,15 @@ export const Navbar = () => {
 				
 				</nav>
 			</header>
+			
 			<button
-				onClick={() => setIsOpen(!isOpen)}
-				className={`fixed top-4 lg:top-6 right-4 md:right-8 lg:right-10 z-70 flex items-center gap-2 ${isOpen ? "bg-warm-cream text-walnut-shadow border-warm-cream" : "border-dotted"} md:hidden px-[1em] py-[0.4em] xs:px-[1.5em] xs:py-[0.6em] sm:px-[1.8em] sm:py-[0.9em] border-[1.4px] rounded-full cursor-pointer transition-all duration-200`}
+				onClick={toggleMenu}
+				className={`fixed top-4 lg:top-6 right-4 md:right-8 lg:right-10 z-70 flex items-center gap-2 ${isMenuOpen ? "bg-warm-cream text-walnut-shadow border-warm-cream" : "border-dotted"} md:hidden px-[1em] py-[0.4em] xs:px-[1.5em] xs:py-[0.6em] sm:px-[1.8em] sm:py-[0.9em] border-[1.4px] rounded-full cursor-pointer transition-all duration-200`}
 			>
 				<div
-					className={`w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full ${isOpen ? "bg-walnut-shadow" : "bg-warm-cream"}`}/>
+					className={`w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full ${isMenuOpen ? "bg-walnut-shadow" : "bg-warm-cream"}`}/>
 				<p className={"uppercase text-[12px] xs:text-[14px] sm:text-[20px] font-semibold tracking-tighter scale-y-105"}>
-					{isOpen ? "Close" : "Menu"}
+					{isMenuOpen ? "Close" : "Menu"}
 				</p>
 			</button>
 		

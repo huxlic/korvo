@@ -3,7 +3,7 @@ export interface NavLinks {
 	href: string;
 }
 
-export interface OpenMenu {
-	isOpen: boolean;
-	setIsOpen: (isOpen: boolean) => void;
+export interface MenuStore {
+	isMenuOpen: boolean;
+	toggleMenu: () => void;
 }
