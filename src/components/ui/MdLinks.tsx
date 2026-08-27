@@ -6,7 +6,8 @@ export const MdLinks = () => {
 	
 	return (
 		<div className={"md:hidden grid grid-cols-4 fixed z-60 inset-0 bg-[#201914bf]"}>
-			<div className="flex flex-col justify-between bg-walnut-shadow col-span-3 col-start-2 px-10 py-8">
+			<div onClick={() => setIsOpen(!isOpen)}/>
+			<div className="flex flex-col justify-between bg-walnut-shadow col-span-3 px-10 py-8">
 				<div/>
 				<div className={"flex flex-col gap-6 uppercase text-[73px] font-semibold tracking-tighter"}>
 					{
