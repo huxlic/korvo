@@ -6,11 +6,15 @@ import {SplitText} from "gsap/SplitText";
 import {useGSAP} from "@gsap/react";
 import {useRef} from "react";
 import useOpenMenu from "../../store/store.ts";
+import {useMediaQuery} from "react-responsive";
 
 gsap.registerPlugin(SplitText);
 
 export const Navbar = () => {
 	const {isOpen, setIsOpen} = useOpenMenu();
+	
+	const isSmDown = useMediaQuery({maxWidth: 639});
+	const isMdDown = useMediaQuery({maxWidth: 768});
 	
 	const wordmarkRef = useRef<HTMLAnchorElement | null>(null);
 	const dotRef = useRef<HTMLDivElement | null>(null);
@@ -52,7 +56,7 @@ export const Navbar = () => {
 					scale: () => 94 / wordmark.offsetWidth,
 					top: "50%",
 					yPercent: -50,
-					transformOrigin: "left top",
+					transformOrigin: isSmDown ? "left bottom" : isMdDown ? "left center" : "left top",
 					duration: 1,
 					ease: "power2.inOut",
 					delay: 1
@@ -72,7 +76,7 @@ export const Navbar = () => {
 				<nav className={"relative w-full flex justify-between items-center box-border"}>
 					
 					<div
-						className="flex flex-col items-end sm:block left-0 px-8 sm:p-0 sm:relative z-60 w-full sm:w-[clamp(326px,45vw,550px)]">
+						className="flex flex-col items-end sm:block left-0 sm:p-0 sm:relative z-60 w-full sm:w-[clamp(326px,45vw,550px)]">
 						<div className="hidden md:block w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full bg-warm-cream"
 						     ref={dotRef}/>
 						<p className={"text text-[clamp(10px,3vw,24px)] sm:text-[10px] md:text-[13px] lg:text-[16px] sm:absolute right-0 top-full w-max uppercase font-semibold tracking-tighter overflow-hidden "}
