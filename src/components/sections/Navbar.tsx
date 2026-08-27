@@ -56,7 +56,7 @@ export const Navbar = () => {
 					scale: () => 94 / wordmark.offsetWidth,
 					top: "50%",
 					yPercent: -50,
-					transformOrigin: isSmDown ? "left bottom" : isMdDown ? "left center" : "left top",
+					transformOrigin: isSmDown ? "left top" : isMdDown ? "left center" : "left top",
 					duration: 1,
 					ease: "power2.inOut",
 					delay: 1
