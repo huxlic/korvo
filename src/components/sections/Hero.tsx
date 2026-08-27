@@ -95,10 +95,7 @@ export const Hero = () => {
 			}, "sync")
 			.to(hypeDesc.chars, {
 				opacity: 1,
-				stagger: {
-					each: 0.025,
-					from: "end"
-				},
+				stagger: 0.025,
 				ease: "circ.in",
 				duration: 1
 			}, "sync")
@@ -107,17 +104,22 @@ export const Hero = () => {
 				ease: "circ.inOut"
 			}, "<")
 			.from("#hype-desc", {
-				yPercent: 40,
+				yPercent: 50,
 				ease: "circ.inOut"
 			}, "<")
+			.from("#drive", {
+				opacity: 0,
+				xPercent: 100
+				
+			})
 			.to("#hype-title", {
 				opacity: 0,
-				yPercent: 30,
+				yPercent: 40,
 				ease: "circ.inOut"
 			})
 			.to("#hype-desc", {
 				opacity: 0,
-				yPercent: -30,
+				yPercent: -40,
 				ease: "circ.inOut"
 			}, "<")
 			.to("#hero-content", {
@@ -129,9 +131,9 @@ export const Hero = () => {
 	
 	return (
 		<>
-			<section id="hero" className={"relative w-full h-[1000vh]"}>
+			<section id="hero" className={"relative w-full h-[800vh]"}>
 				<div
-					className={"sticky top-0 h-screen bg-cover bg-bottom-right "}
+					className={"sticky top-0 h-screen bg-cover bg-bottom-right overflow-hidden "}
 					style={{backgroundImage: `url(${cutting_mat})`}}
 				>
 					<div
@@ -155,7 +157,8 @@ export const Hero = () => {
 							advanced coaster.</p>
 					</div>
 					
-					<div id="hero-content" className="absolute inset-0 flex items-center justify-between px-10">
+					<div id="hero-content"
+					     className="absolute inset-0 flex items-center justify-between px-10 overflow-hidden">
 						<p id="hero-copy"
 						   className={"absolute z-10 right-10 w-71.75 lg:w-105 leading-6 text-[18px] lg:leading-normal lg:text-[20px] lg:text-[24px] font-medium tracking-tighter"}
 						   aria-label={"Optimized to lift, insulate, and grip in real time. korvo makes the mundane feel groundbreaking."}>Optimized
@@ -177,6 +180,12 @@ export const Hero = () => {
 							</p>
 						</div>
 					
+					</div>
+					
+					<div id="drive" className="absolute bottom-5 right-8">
+						<span className="absolute left-0 top-0 w-full h-px dashline"/>
+						<p className={"uppercase tracking-tighter font-semibold text-[11px] text-end mt-[20%] leading-none"}>*
+							manual <br/> programming</p>
 					</div>
 					
 					<Canvas className={""}>
