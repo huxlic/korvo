@@ -131,7 +131,7 @@ export const Hero = () => {
 	
 	return (
 		<>
-			<section id="hero" className={"relative w-full h-[800vh]"}>
+			<section id="hero" className={"relative w-full h-[700vh]"}>
 				<div
 					className={"sticky top-0 h-screen bg-cover bg-bottom-right overflow-hidden "}
 					style={{backgroundImage: `url(${cutting_mat})`}}
