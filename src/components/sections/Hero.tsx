@@ -9,7 +9,7 @@ export const Hero = () => {
 	
 	useGSAP(() => {
 		const heroCopy = SplitText.create("#hero-copy", {
-			type: "lines, words, chars",
+			type: "words, lines, chars",
 		})
 		
 		const hypeTitle = SplitText.create("#hype-title", {
@@ -123,7 +123,8 @@ export const Hero = () => {
 				ease: "circ.inOut"
 			}, "<")
 			.to("#hero-content", {
-				backgroundImage: "linear-gradient(to right, #1A1513, #DD5000)"
+				// backgroundImage: "linear-gradient(to right, #1A1513, #DD5000)"
+				backgroundImage: "linear-gradient(to left bottom, #1a1513, #482416, #773216, #dd5000)"
 			})
 		
 		

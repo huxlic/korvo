@@ -2,12 +2,20 @@ import navLinks from "../../data/navLinks.ts";
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
 import useMenuStore from "../../store/useMenuStore.ts";
-import {useRef} from "react";
+import {useEffect, useRef} from "react";
+import {useMediaQuery} from "react-responsive";
 
 export const MdLinks = () => {
 	const {isMenuOpen, toggleMenu} = useMenuStore();
 	
 	const menuTl = useRef<gsap.core.Timeline | null>(null);
+	
+	const isMdUp = useMediaQuery({minWidth: 768});
+	useEffect(() => {
+		if (isMdUp && isMenuOpen) {
+			toggleMenu();
+		}
+	}, [isMdUp, isMenuOpen, toggleMenu]);
 	
 	useGSAP(() => {
 		menuTl.current = gsap.timeline({
@@ -38,12 +46,14 @@ export const MdLinks = () => {
 	return (
 		<div id="links-holder" className={"md:hidden grid grid-cols-4 fixed z-60 inset-0 bg-[#201914bf]"}>
 			<div onClick={toggleMenu}/>
-			<aside id="md-links" className="flex flex-col justify-between bg-walnut-shadow col-span-3 px-10 py-8">
+			<aside id="md-links"
+			       className="flex flex-col justify-between bg-walnut-shadow col-span-3 px-6 sm:px-10 py-8">
 				<div/>
-				<div className={"flex flex-col gap-6 uppercase text-[73px] font-semibold tracking-tighter"}>
+				<div className={"flex flex-col gap-6 uppercase font-semibold tracking-tighter"}>
 					{
 						navLinks.map(({label, href}) => (
-							<li className={"relative w-max list-none leading-none"} onClick={toggleMenu}
+							<li className={"relative w-max list-none leading-none text-[clamp(1rem,10vw,73px)]"}
+							    onClick={toggleMenu}
 							    key={label}>
 								<a href={href}>
 									{label}
@@ -56,10 +66,10 @@ export const MdLinks = () => {
 				
 				<div className="flex flex-col uppercase font-semibold">
 					<span
-						className={"w-max text-driftwood text-[22px] tracking-tighter"}>general enquires:</span>
+						className={"w-max text-driftwood text-[20px] tracking-tighter"}>general enquires:</span>
 					
 					<a href="mailto:oladimejihassan03@gmail.com"
-					   className={"text-[28px] tracking-tighter scale-y-105 leading-none"}>oladimejihassan03@gmail.com</a>
+					   className={"text-[14px] sm:text-[20px] uppercase tracking-tighter scale-y-105 leading-none"}>oladimejihassan03@gmail.com</a>
 				</div>
 			</aside>
 		</div>
