@@ -18,20 +18,15 @@ const AnimatedCork = () => {
 		});
 		
 		tl.to(corkRef.current.scale, {
-				x: 0.4,
-				y: 0.4,
+				x: 0.6,
+				y: 0.6,
 				duration: 1,
 			})
 			.to(corkRef.current.rotation, {
 				x: -Math.PI * 2,
 				y: -Math.PI * 2,
 				duration: 1,
-			})
-			.to(corkRef.current.scale, {
-				x: 0.6,
-				y: 0.6,
-				duration: 1,
-			}, "<")
+			}, "<20%")
 			.to(corkRef.current.scale, {
 				x: 0.2,
 				y: 0.2,

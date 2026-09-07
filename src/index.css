@@ -18,6 +18,10 @@ html, body, #root {
     --color-white-transparent: color-mix(in srgb, var(--color-warm-cream) 0%, transparent);
 }
 
+@theme {
+    --breakpoint-xs: 420px;
+}
+
 @utility dashline {
     background-image: repeating-linear-gradient(
             90deg,
