@@ -45,17 +45,18 @@ export const MdLinks = () => {
 	
 	return (
 		<div id="links-holder" className={"md:hidden grid grid-cols-4 fixed z-60 inset-0 bg-[#201914bf]"}>
-			<div onClick={toggleMenu}/>
+			<button onClick={toggleMenu}/>
 			<aside id="md-links"
 			       className="flex flex-col justify-between bg-walnut-shadow col-span-3 px-6 sm:px-10 py-8">
 				<div/>
 				<div className={"flex flex-col gap-6 uppercase font-semibold tracking-tighter"}>
 					{
 						navLinks.map(({label, href}) => (
-							<li className={"relative w-max list-none leading-none text-[clamp(1rem,10vw,73px)]"}
-							    onClick={toggleMenu}
-							    key={label}>
-								<a href={href}>
+							<li
+								key={label}>
+								<a href={href}
+								   className={"relative w-max list-none leading-none text-[clamp(1rem,10vw,73px)]"}
+								   onClick={toggleMenu}>
 									{label}
 								</a>
 								<span className="absolute left-0 -bottom-2 w-full h-px dashline"/>
