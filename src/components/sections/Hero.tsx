@@ -123,8 +123,7 @@ export const Hero = () => {
 				ease: "circ.inOut"
 			}, "<")
 			.to("#hero-content", {
-				// backgroundImage: "linear-gradient(to right, #1A1513, #DD5000)"
-				backgroundImage: "linear-gradient(to left bottom, #1a1513, #482416, #773216, #dd5000)"
+				backgroundImage: "linear-gradient(225deg, #1a1513 69%, #482416 100%)"
 			})
 		
 		
@@ -148,7 +147,7 @@ export const Hero = () => {
 							and rebuilt by hux.
 						</p>
 						
-						<span id="dashline" className="w-full h-px dashline"/>
+						<span id="dashline" className="w-[clamp(100%, 5vw, 100%)] h-px dashline"/>
 						
 						<p id="hero-card-desc"
 						   className={"text-end text-[11px] lg:text-[15px] pt-[10%] font-medium tracking-tighter"}
