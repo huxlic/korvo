@@ -34,7 +34,7 @@ export const Navbar = () => {
 				scrollTrigger: {
 					trigger: "#hero",
 					start: "top top",
-					end: "+=1000",
+					end: "+=300",
 					scrub: true,
 					invalidateOnRefresh: true,
 				},
@@ -59,7 +59,7 @@ export const Navbar = () => {
 					transformOrigin: isSmDown ? "left top" : isMdDown ? "left center" : "left top",
 					duration: 1,
 					ease: "power2.inOut",
-					delay: 1
+					// delay: 1
 				}
 			)
 			.to(
