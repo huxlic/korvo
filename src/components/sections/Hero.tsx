@@ -188,7 +188,7 @@ export const Hero = () => {
 							manual <br/> programming</p>
 					</div>
 					
-					<Canvas>
+					<Canvas camera={{position: [0, 0, 8], fov: 50}}>
 						<ambientLight intensity={1.5}/>
 						<directionalLight position={[3, 5, 2]} intensity={5}/>
 						<AnimatedCork/>
