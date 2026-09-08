@@ -10,9 +10,24 @@ export const Hero = () => {
 	const {setActiveSection} = useNavStore();
 	
 	useGSAP(() => {
+		
+		const tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: "#hero",
+				start: "top top",
+				end: "+=1000",
+				pin: "#hero-stage",
+				pinSpacing: false,
+				scrub: 1,
+				onEnter: () => setActiveSection("intro")
+			}
+		});
+		
+		
 		const heroCopy = SplitText.create("#hero-copy", {
-			type: "lines, words, chars",
-			charsClass: "inline-block"
+			type: "lines",
+			charsClass: "w-max",
+			mask: "lines"
 		})
 		
 		const hypeTitle = SplitText.create("#hype-title", {
@@ -35,18 +50,6 @@ export const Hero = () => {
 			mask: "lines"
 		})
 		
-		
-		const tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: "#hero",
-				start: "top top",
-				end: "+=1000",
-				pin: "#hero-stage",
-				pinSpacing: false,
-				scrub: 1,
-				onEnter: () => setActiveSection("intro")
-			}
-		});
 		
 		tl.to("#hero-content", {
 				backgroundColor: "#1A1513",
