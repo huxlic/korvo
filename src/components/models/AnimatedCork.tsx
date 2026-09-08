@@ -1,8 +1,8 @@
-import Cork from "./Cork.tsx";
 import {useRef} from "react";
 import * as THREE from "three";
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
+import Cork from "./Cork.tsx";
 
 const AnimatedCork = () => {
 	const corkRef = useRef<THREE.Group>(null!);
@@ -20,16 +20,23 @@ const AnimatedCork = () => {
 		tl.to(corkRef.current.scale, {
 				x: 0.6,
 				y: 0.6,
+				z: 0.6,
 				duration: 1,
 			})
+			.to(corkRef.current.rotation, {
+				x: Math.PI * 0.25,
+				y: -Math.PI * 2,
+				duration: 1,
+			}, "<10%")
 			.to(corkRef.current.rotation, {
 				x: -Math.PI * 2,
 				y: -Math.PI * 2,
 				duration: 1,
-			}, "<20%")
+			})
 			.to(corkRef.current.scale, {
 				x: 0.2,
 				y: 0.2,
+				z: 0.2,
 				duration: 1,
 			});
 	}, []);
