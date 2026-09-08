@@ -123,7 +123,7 @@ export const Hero = () => {
 				ease: "circ.inOut"
 			}, "<")
 			.to("#hero-content", {
-				backgroundImage: "linear-gradient(225deg, #1a1513 69%, #482416 100%)"
+				backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"
 			})
 		
 		
@@ -131,9 +131,9 @@ export const Hero = () => {
 	
 	return (
 		<>
-			<section id="hero" className={"relative w-full h-[700vh]"}>
+			<section id="hero" className={"relative w-full h-[600vh]"}>
 				<div
-					className={"sticky top-0 h-screen bg-cover bg-bottom-right overflow-hidden "}
+					className={"sticky top-0 h-dvh bg-cover bg-bottom-right overflow-hidden"}
 					style={{backgroundImage: `url(${cutting_mat})`}}
 				>
 					<div
@@ -188,7 +188,7 @@ export const Hero = () => {
 							manual <br/> programming</p>
 					</div>
 					
-					<Canvas className={""}>
+					<Canvas>
 						<ambientLight intensity={1.5}/>
 						<directionalLight position={[3, 5, 2]} intensity={5}/>
 						<AnimatedCork/>

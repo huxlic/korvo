@@ -26,8 +26,8 @@ type GLTFResult = GLTF & {
 	animations: GLTFAction[]
 }
 
-export function Model(props: JSX.IntrinsicElements['group']) {
-	const {nodes, materials} = useGLTF('/coffee_cup-transformed.glb') as unknown as GLTFResult
+export default function CoffeeCup(props: JSX.IntrinsicElements['group']) {
+	const {nodes, materials} = useGLTF('models/coffee_cup-transformed.glb') as unknown as GLTFResult
 	return (
 		<group {...props} dispose={null}>
 			<mesh geometry={nodes.Coffee_cup_low_Material_0.geometry} material={materials.Material}/>
