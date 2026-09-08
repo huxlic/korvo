@@ -2,18 +2,22 @@ import {useRef} from "react";
 import {useGSAP} from "@gsap/react";
 import {gsap} from "gsap";
 import {SplitText} from "gsap/SplitText";
+import useNavStore from "../../store/useNavStore.ts";
 
 gsap.registerPlugin(SplitText);
 
 interface FlipLinkProps {
 	children: React.ReactNode;
 	href: string;
+	label: string;
 }
 
-export const FlipLink = ({children, href}: FlipLinkProps) => {
+export const FlipLink = ({children, href, label}: FlipLinkProps) => {
 	const containerRef = useRef<HTMLAnchorElement>(null);
 	const timelineRef = useRef<gsap.core.Timeline | null>(null);
 	const tlRef = useRef<gsap.core.Timeline | null>(null);
+	
+	const {activeSection} = useNavStore();
 	
 	const handleEnter = () => timelineRef.current?.play();
 	const handleLeave = () => timelineRef.current?.reverse();
@@ -35,7 +39,7 @@ export const FlipLink = ({children, href}: FlipLinkProps) => {
 				paused: true,
 				defaults: {
 					duration: 0.1,
-					stagger: { each: 0.03, from: "end" },
+					stagger: {each: 0.03, from: "end"},
 					ease: "bounce.out",
 				},
 			});
@@ -67,7 +71,7 @@ export const FlipLink = ({children, href}: FlipLinkProps) => {
 		>
 			<span className="primary">{children}</span>
 			<span className="clone absolute inset-0">{children}</span>
-			<span className="absolute left-0 bottom-0 w-full h-px dashline" />
+			{activeSection === label.toLowerCase() && <span className="absolute left-0 bottom-0 w-full h-px dashline"/>}
 		</a>
 	);
 };

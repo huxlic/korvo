@@ -93,7 +93,7 @@ export const Navbar = () => {
 					<div
 						className={"hidden md:flex relative z-10 gap-4 text-[7px] md:text-[8px] lg:text-[10px] font-semibold"}>
 						{navLinks.map(({label, href}) => (
-							<FlipLink key={href} href={href}>
+							<FlipLink label={label} key={href} href={href}>
 								{label}
 							</FlipLink>
 						))}
