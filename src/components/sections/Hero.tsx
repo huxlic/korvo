@@ -8,9 +8,16 @@ import {SplitText} from "gsap/SplitText";
 export const Hero = () => {
 	
 	useGSAP(() => {
-		const heroCopy = SplitText.create("#hero-copy", {
+		let heroCopy = SplitText.create("#hero-copy", {
 			type: "lines, words, chars",
 			charsClass: "inline-block"
+		})
+		
+		document.fonts.ready.then(() => {
+			heroCopy = SplitText.create("#hero-copy", {
+				type: "lines, words, chars",
+				charsClass: "inline-block"
+			})
 		})
 		
 		const hypeTitle = SplitText.create("#hype-title", {
