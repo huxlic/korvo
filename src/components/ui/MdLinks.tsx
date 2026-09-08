@@ -53,6 +53,7 @@ export const MdLinks = () => {
 					{
 						navLinks.map(({label, href}) => (
 							<li
+								className="relative list-none"
 								key={label}>
 								<a href={href}
 								   className={"relative w-max list-none leading-none text-[clamp(1rem,10vw,73px)]"}
