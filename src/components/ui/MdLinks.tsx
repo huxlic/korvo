@@ -4,9 +4,11 @@ import gsap from "gsap";
 import useMenuStore from "../../store/useMenuStore.ts";
 import {useEffect, useRef} from "react";
 import {useMediaQuery} from "react-responsive";
+import useNavStore from "../../store/useNavStore.ts";
 
 export const MdLinks = () => {
 	const {isMenuOpen, toggleMenu} = useMenuStore();
+	const {activeSection} = useNavStore();
 	
 	const menuTl = useRef<gsap.core.Timeline | null>(null);
 	
@@ -53,14 +55,15 @@ export const MdLinks = () => {
 					{
 						navLinks.map(({label, href}) => (
 							<li
-								className="relative list-none"
+								className="relative list-none w-max"
 								key={label}>
 								<a href={href}
-								   className={"relative w-max list-none leading-none text-[clamp(1rem,10vw,73px)]"}
+								   className={"list-none leading-none text-[clamp(1rem,10vw,73px)]"}
 								   onClick={toggleMenu}>
 									{label}
 								</a>
-								<span className="absolute left-0 -bottom-2 w-full h-px dashline"/>
+								{activeSection === label.toLowerCase() &&
+									<span className="absolute left-0 -bottom-2 w-full h-px dashline"/>}
 							</li>
 						))
 					}

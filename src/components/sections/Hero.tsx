@@ -4,8 +4,10 @@ import gsap from "gsap";
 import AnimatedCork from "../models/AnimatedCork.tsx";
 import {useGSAP} from "@gsap/react";
 import {SplitText} from "gsap/SplitText";
+import useNavStore from "../../store/useNavStore.ts";
 
 export const Hero = () => {
+	const {setActiveSection} = useNavStore();
 	
 	useGSAP(() => {
 		const heroCopy = SplitText.create("#hero-copy", {
@@ -42,6 +44,7 @@ export const Hero = () => {
 				pin: "#hero-stage",
 				pinSpacing: false,
 				scrub: 1,
+				onEnter: () => setActiveSection("intro")
 			}
 		});
 		
