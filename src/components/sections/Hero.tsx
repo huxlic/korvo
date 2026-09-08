@@ -9,7 +9,8 @@ export const Hero = () => {
 	
 	useGSAP(() => {
 		const heroCopy = SplitText.create("#hero-copy", {
-			type: "words, lines, chars",
+			type: "lines, words, chars",
+			charsClass: "inline-block"
 		})
 		
 		const hypeTitle = SplitText.create("#hype-title", {
@@ -38,6 +39,8 @@ export const Hero = () => {
 				trigger: "#hero",
 				start: "top top",
 				end: "+=1000",
+				pin: "#hero-stage",
+				pinSpacing: false,
 				scrub: 1,
 			}
 		});
@@ -59,15 +62,15 @@ export const Hero = () => {
 					from: "end"
 				},
 				duration: 1,
-				ease: "c"
-			})
+				ease: "circ.in"
+			}, "<10%")
 			.to(heroCardDesc.lines, {
 				yPercent: 100,
 				stagger: {
 					each: 0.05,
 					from: "end"
 				},
-				ease: "c",
+				ease: "circ.in",
 				duration: 1,
 			}, "<")
 			.to("#dashline", {
@@ -133,7 +136,8 @@ export const Hero = () => {
 		<>
 			<section id="hero" className={"relative w-full h-[300vh]"}>
 				<div
-					className={"sticky top-0 h-dvh bg-cover bg-bottom-right overflow-hidden"}
+					id="hero-stage"
+					className={"top-0 h-dvh bg-cover bg-bottom-right overflow-hidden"}
 					style={{backgroundImage: `url(${cutting_mat})`}}
 				>
 					<div
@@ -160,7 +164,7 @@ export const Hero = () => {
 					<div id="hero-content"
 					     className="absolute inset-0 flex items-center justify-between px-10 overflow-hidden">
 						<p id="hero-copy"
-						   className={"absolute z-10 right-10 w-71.75 lg:w-105 leading-6 text-[18px] lg:leading-normal lg:text-[20px] lg:text-[24px] font-medium tracking-tighter"}
+						   className={"absolute z-10 right-10 w-71.75 lg:w-102 leading-6 text-[18px] lg:leading-normal lg:text-[20px] lg:text-[24px] font-medium tracking-tighter"}
 						   aria-label={"Optimized to lift, insulate, and grip in real time. korvo makes the mundane feel groundbreaking."}>Optimized
 							to lift, insulate, and grip in real time. Korvo makes the mundane feel groundbreaking.</p>
 						
