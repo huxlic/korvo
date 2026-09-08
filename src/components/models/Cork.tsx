@@ -13,33 +13,34 @@ class GLTFAction {
 }
 
 type GLTFResult = GLTF & {
-  nodes: {
-    ['oryzo-1-344b-a0b']: THREE.Mesh
-  }
-  materials: object
-  animations: GLTFAction[]
+	nodes: {
+		['oryzo-1-344b-a0b']: THREE.Mesh
+	}
+	materials: object
+	animations: GLTFAction[]
 }
 
 const Cork = forwardRef<THREE.Group, JSX.IntrinsicElements['group']>((props, ref) => {
-  const { nodes } = useGLTF('/models/cork-transformed.glb') as unknown as GLTFResult
-  
-  const [diffuse, roughness, normal] = useTexture([
-    '/textures/cork/diffuse.jpg',
-    '/textures/cork/roughness.jpg',
-    '/textures/cork/normal.jpg',
-  ])
-  
-  return (
-    <group {...props} ref={ref} dispose={null}>
-      <mesh geometry={nodes['oryzo-1-344b-a0b'].geometry} material={nodes['oryzo-1-344b-a0b'].material} rotation={[Math.PI, 0, 0]}>
-        <meshStandardMaterial
-            map={diffuse}
-            roughnessMap={roughness}
-            normalMap={normal}
-        />
-      </mesh>
-    </group>
-  )
+	const {nodes} = useGLTF('/models/cork-transformed.glb') as unknown as GLTFResult
+	
+	const [diffuse, roughness, normal] = useTexture([
+		'/textures/cork/diffuse.jpg',
+		'/textures/cork/roughness.jpg',
+		'/textures/cork/normal.jpg',
+	])
+	
+	return (
+		<group {...props} ref={ref} dispose={null}>
+			<mesh geometry={nodes['oryzo-1-344b-a0b'].geometry} material={nodes['oryzo-1-344b-a0b'].material}
+			      rotation={[Math.PI, 0, 0]}>
+				<meshStandardMaterial
+					map={diffuse}
+					roughnessMap={roughness}
+					normalMap={normal}
+				/>
+			</mesh>
+		</group>
+	)
 })
 
 export default Cork;
