@@ -8,16 +8,9 @@ import {SplitText} from "gsap/SplitText";
 export const Hero = () => {
 	
 	useGSAP(() => {
-		let heroCopy = SplitText.create("#hero-copy", {
+		const heroCopy = SplitText.create("#hero-copy", {
 			type: "lines, words, chars",
 			charsClass: "inline-block"
-		})
-		
-		document.fonts.ready.then(() => {
-			heroCopy = SplitText.create("#hero-copy", {
-				type: "lines, words, chars",
-				charsClass: "inline-block"
-			})
 		})
 		
 		const hypeTitle = SplitText.create("#hype-title", {
@@ -87,7 +80,7 @@ export const Hero = () => {
 			.to("#hero-card", {
 				opacity: 0,
 				display: "none",
-			}, "<50%")
+			})
 			.to(heroCopy.elements, {
 				display: "none"
 			})
@@ -135,7 +128,6 @@ export const Hero = () => {
 			.to("#hero-content", {
 				backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"
 			})
-		
 		
 	}, [])
 	
