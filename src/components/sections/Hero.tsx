@@ -5,11 +5,19 @@ import AnimatedCork from "../models/AnimatedCork.tsx";
 import {useGSAP} from "@gsap/react";
 import {SplitText} from "gsap/SplitText";
 import useNavStore from "../../store/useNavStore.ts";
+import {useEffect, useState} from "react";
 
 export const Hero = () => {
 	const {setActiveSection} = useNavStore();
+	const [fontsReady, setFontsReady] = useState(false);
+	
+	useEffect(() => {
+		document.fonts.ready.then(() => setFontsReady(true));
+	}, []);
 	
 	useGSAP(() => {
+		
+		if (!fontsReady) return;
 		
 		const tl = gsap.timeline({
 			scrollTrigger: {
@@ -135,7 +143,7 @@ export const Hero = () => {
 				backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"
 			})
 		
-	}, [])
+	}, {dependencies: [fontsReady], revertOnUpdate: true})
 	
 	return (
 		<>
