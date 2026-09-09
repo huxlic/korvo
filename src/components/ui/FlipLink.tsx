@@ -3,6 +3,7 @@ import {useGSAP} from "@gsap/react";
 import {gsap} from "gsap";
 import {SplitText} from "gsap/SplitText";
 import useNavStore from "../../store/useNavStore.ts";
+import handleNavClick from "../../utils/handleNavClick.ts";
 
 gsap.registerPlugin(SplitText);
 
@@ -15,13 +16,11 @@ interface FlipLinkProps {
 export const FlipLink = ({children, href, label}: FlipLinkProps) => {
 	const containerRef = useRef<HTMLAnchorElement>(null);
 	const timelineRef = useRef<gsap.core.Timeline | null>(null);
-	const tlRef = useRef<gsap.core.Timeline | null>(null);
 	
 	const {activeSection} = useNavStore();
 	
 	const handleEnter = () => timelineRef.current?.play();
 	const handleLeave = () => timelineRef.current?.reverse();
-	const handleClick = () => tlRef.current?.play();
 	
 	useGSAP(
 		() => {
@@ -67,7 +66,7 @@ export const FlipLink = ({children, href, label}: FlipLinkProps) => {
 			ref={containerRef}
 			onMouseEnter={handleEnter}
 			onMouseLeave={handleLeave}
-			onClick={handleClick}
+			onClick={(e) => handleNavClick(e, href)}
 		>
 			<span className="primary">{children}</span>
 			<span className="clone absolute inset-0">{children}</span>
