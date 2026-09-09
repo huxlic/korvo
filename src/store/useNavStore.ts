@@ -6,7 +6,7 @@ interface NavState {
 }
 
 const useNavStore = create<NavState>((set) => ({
-	activeSection: 'intro',
+	activeSection: '',
 	setActiveSection: (section) => set({activeSection: section}),
 }))
 

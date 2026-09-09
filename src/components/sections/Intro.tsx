@@ -7,7 +7,7 @@ import {SplitText} from "gsap/SplitText";
 import useNavStore from "../../store/useNavStore.ts";
 import {useEffect, useState} from "react";
 
-export const Hero = () => {
+export const Intro = () => {
 	const {setActiveSection} = useNavStore();
 	const [fontsReady, setFontsReady] = useState(false);
 	
@@ -21,10 +21,10 @@ export const Hero = () => {
 		
 		const tl = gsap.timeline({
 			scrollTrigger: {
-				trigger: "#hero",
+				trigger: "#intro",
 				start: "top top",
 				end: "+=1000",
-				pin: "#hero-stage",
+				pin: "#intro-stage",
 				pinSpacing: false,
 				scrub: 1,
 				onEnter: () => setActiveSection("intro")
@@ -32,7 +32,7 @@ export const Hero = () => {
 		});
 		
 		
-		const heroCopy = SplitText.create("#hero-copy", {
+		const introCopy = SplitText.create("#intro-copy", {
 			type: "lines",
 			charsClass: "w-max",
 			mask: "lines"
@@ -47,12 +47,12 @@ export const Hero = () => {
 			charsClass: "opacity-0 inline-block",
 		})
 		
-		const heroCardHeader = SplitText.create("#hero-card-header", {
+		const introCardHeader = SplitText.create("#intro-card-header", {
 			type: "lines",
 			linesClass: "line",
 			mask: "lines"
 		})
-		const heroCardDesc = SplitText.create("#hero-card-desc", {
+		const introCardDesc = SplitText.create("#intro-card-desc", {
 			type: "lines",
 			linesClass: "line",
 			mask: "lines"
@@ -63,13 +63,13 @@ export const Hero = () => {
 				backgroundColor: "#1A1513",
 				backdropFilter: "blur(4px)"
 			})
-			.to(heroCopy.lines, {
+			.to(introCopy.lines, {
 				x: 40,
 				filter: "blur(8px)",
 				opacity: 0,
 				stagger: 0.05
 			}, "<")
-			.to(heroCardHeader.lines, {
+			.to(introCardHeader.lines, {
 				yPercent: 100,
 				stagger: {
 					each: 0.05,
@@ -78,7 +78,7 @@ export const Hero = () => {
 				duration: 1,
 				ease: "circ.in"
 			}, "<10%")
-			.to(heroCardDesc.lines, {
+			.to(introCardDesc.lines, {
 				yPercent: 100,
 				stagger: {
 					each: 0.05,
@@ -91,11 +91,11 @@ export const Hero = () => {
 				width: 0,
 				ease: "circ.in"
 			}, "<")
-			.to("#hero-card", {
+			.to("#intro-card", {
 				opacity: 0,
 				display: "none",
 			})
-			.to(heroCopy.elements, {
+			.to(introCopy.elements, {
 				display: "none"
 			})
 			.to("#ai-hype", {
@@ -147,16 +147,16 @@ export const Hero = () => {
 	
 	return (
 		<>
-			<section id="hero" className={"relative w-full h-[300vh]"}>
+			<section id="intro" className={"relative w-full h-[300vh]"}>
 				<div
-					id="hero-stage"
+					id="intro-stage"
 					className={"top-0 h-dvh bg-cover bg-bottom-right overflow-hidden"}
 					style={{backgroundImage: `url(${cutting_mat})`}}
 				>
 					<div
-						id="hero-card"
+						id="intro-card"
 						className="flex flex-col justify-between absolute z-10 ml-8 lg:ml-10 left-0 bottom-4 lg:bottom-6 box-border px-3 py-3 lg:px-4 lg:py-5 w-43.25 lg:w-60 bg-linear-to-br from-white/15 to-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.15)] border border-[#FFFFFF26] backdrop-blur-lg backdrop-saturate-100 ">
-						<p id="hero-card-header"
+						<p id="intro-card-header"
 						   aria-label={"lusion's design, deconstructed, studied and rebuilt by hux."}
 						   className={"text-[16px] h-max lg:text-[20px] pb-[25%] uppercase font-semibold scale-y-105 tracking-tighter leading-4.5 lg:leading-6 overflow-hidden"}>lusion's
 							design,
@@ -166,7 +166,7 @@ export const Hero = () => {
 						
 						<span id="dashline" className="w-[clamp(100%, 5vw, 100%)] h-px dashline"/>
 						
-						<p id="hero-card-desc"
+						<p id="intro-card-desc"
 						   className={"text-end text-[11px] lg:text-[15px] pt-[10%] font-medium tracking-tighter"}
 						   aria-label={"Quite possibly the most unnecessarily advanced coaster."}>Quite
 							possibly the most
@@ -174,24 +174,24 @@ export const Hero = () => {
 							advanced coaster.</p>
 					</div>
 					
-					<div id="hero-content"
-					     className="absolute z-10 inset-0 flex items-center justify-between px-10 overflow-hidden">
-						<p id="hero-copy"
+					<div id="intro-content"
+					     className="absolute z-9 inset-0 flex items-center justify-between px-10 overflow-hidden">
+						<p id="intro-copy"
 						   className={"absolute z-10 right-10 w-74 lg:w-102 leading-6 text-[18px] lg:leading-normal lg:text-[20px] lg:text-[24px] font-medium tracking-tighter"}
 						   aria-label={"Optimized to lift, insulate, and grip in real time. korvo makes the mundane feel groundbreaking."}>Optimized
 							to lift, insulate, and grip in real time. Korvo makes the mundane feel groundbreaking.</p>
 						
 						<div id="ai-hype"
-						     className="w-full absolute inset-0 py-10 px-5 opacity-0 md:right-10 md:left-10 z-20 flex flex-col md:flex-row justify-end md:justify-between md:items-center gap-50 md:gap-0 md:px-10 lg:px-20">
+						     className="w-full absolute inset-0 py-10 px-5 opacity-0 md:right-10 md:left-10 z-20 flex flex-col md:flex-row justify-end md:justify-between md:items-center gap-60 md:gap-0 md:px-10 lg:px-20">
 							<h2
 								id="hype-title"
-								className={"w-99 md:w-43.75 lg:w-62 uppercase text-[72px] md:text-[32px] lg:text-[45px] font-semibold tracking-tighter leading-18 md:leading-8 lg:leading-11 scale-y-105"}
+								className={"w-full sm:w-99 md:w-43.75 lg:w-62 uppercase text-[70px] md:text-[32px] lg:text-[45px] font-semibold tracking-tighter leading-18 md:leading-8 lg:leading-11 scale-y-105"}
 								aria-label={"isn’t just a coaster."}>isn’t just
 								a coaster.</h2>
 							
 							<p
 								id="hype-desc"
-								className={"w-154 md:w-75 lg:w-65 text-[34px] md:text-[18px] lg:text-[25px] text-end md:text-start leading-10 md:leading-6 lg:leading-8 tracking-tighter font-medium scale-y-105"}
+								className={"sm:w-154 md:w-75 lg:w-65 text-[34px] md:text-[18px] lg:text-[25px] text-end md:text-start leading-10 md:leading-6 lg:leading-8 tracking-tighter font-medium scale-y-105"}
 								aria-label={"Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure."}>
 								Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure.
 							</p>
@@ -199,17 +199,19 @@ export const Hero = () => {
 					
 					</div>
 					
-					<div id="drive" className="absolute bottom-5 right-8">
+					<div id="drive" className="absolute bottom-5 z-10 right-8">
 						<span className="absolute left-0 top-0 w-full h-px dashline"/>
 						<p className={"uppercase tracking-tighter font-semibold text-[11px] text-end mt-[20%] leading-none"}>*
 							manual <br/> programming</p>
 					</div>
 					
-					<div id="canvas" className="absolute inset-0 ">
+					<div id="canvas" className="absolute inset-0 z-5">
 						<Canvas camera={{position: [0, 0, 8], fov: 50}}>
+							{/*<Suspense fallback={<div>Nothing to show</div>}>*/}
 							<ambientLight intensity={1.5}/>
 							<directionalLight position={[3, 5, 2]} intensity={5}/>
 							<AnimatedCork/>
+							{/*</Suspense>*/}
 						</Canvas>
 					</div>
 				

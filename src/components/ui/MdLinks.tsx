@@ -5,6 +5,7 @@ import useMenuStore from "../../store/useMenuStore.ts";
 import {useEffect, useRef} from "react";
 import {useMediaQuery} from "react-responsive";
 import useNavStore from "../../store/useNavStore.ts";
+import handleNavClick from "../../utils/handleNavClick.ts";
 
 export const MdLinks = () => {
 	const {isMenuOpen, toggleMenu} = useMenuStore();
@@ -59,7 +60,10 @@ export const MdLinks = () => {
 								key={label}>
 								<a href={href}
 								   className={"list-none leading-none text-[clamp(1rem,10vw,73px)]"}
-								   onClick={toggleMenu}>
+								   onClick={(e) => {
+									   toggleMenu()
+									   handleNavClick(e, href)
+								   }}>
 									{label}
 								</a>
 								{activeSection === label.toLowerCase() &&
