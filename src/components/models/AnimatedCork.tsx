@@ -24,12 +24,12 @@ const AnimatedCork = () => {
 				duration: 1,
 			})
 			.to(corkRef.current.rotation, {
-				x: -Math.PI * 2,
+				x: Math.PI / 2,
 				y: -Math.PI * 2,
 				duration: 1,
 			}, "<30%")
 			.to(corkRef.current.rotation, {
-				x: -Math.PI * 2,
+				x: 0,
 				y: -Math.PI * 2,
 				duration: 1,
 			})
@@ -42,7 +42,7 @@ const AnimatedCork = () => {
 	}, []);
 	
 	return (
-		<Cork ref={corkRef} scale={0.32}/>
+		<Cork ref={corkRef} scale={0.32} rotation={[0, 0, 0]}/>
 	);
 };
 

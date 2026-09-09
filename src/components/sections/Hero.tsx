@@ -59,7 +59,7 @@ export const Hero = () => {
 		})
 		
 		
-		tl.to("#hero-content", {
+		tl.to("#canvas", {
 				backgroundColor: "#1A1513",
 				backdropFilter: "blur(4px)"
 			})
@@ -139,7 +139,7 @@ export const Hero = () => {
 				yPercent: -40,
 				ease: "circ.inOut"
 			}, "<")
-			.to("#hero-content", {
+			.to("#canvas", {
 				backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"
 			})
 		
@@ -175,14 +175,14 @@ export const Hero = () => {
 					</div>
 					
 					<div id="hero-content"
-					     className="absolute inset-0 flex items-center justify-between px-10 overflow-hidden">
+					     className="absolute z-10 inset-0 flex items-center justify-between px-10 overflow-hidden">
 						<p id="hero-copy"
-						   className={"absolute z-10 right-10 w-71.75 lg:w-102 leading-6 text-[18px] lg:leading-normal lg:text-[20px] lg:text-[24px] font-medium tracking-tighter"}
+						   className={"absolute z-10 right-10 w-74 lg:w-102 leading-6 text-[18px] lg:leading-normal lg:text-[20px] lg:text-[24px] font-medium tracking-tighter"}
 						   aria-label={"Optimized to lift, insulate, and grip in real time. korvo makes the mundane feel groundbreaking."}>Optimized
 							to lift, insulate, and grip in real time. Korvo makes the mundane feel groundbreaking.</p>
 						
 						<div id="ai-hype"
-						     className="w-full absolute opacity-0 md:right-10 md:left-10 z-20 flex flex-col md:flex-row justify-between md:items-center gap-20 md:gap-0 md:px-10 lg:px-20">
+						     className="w-full absolute inset-0 py-10 px-5 opacity-0 md:right-10 md:left-10 z-20 flex flex-col md:flex-row justify-end md:items-center gap-50 md:gap-0 md:px-10 lg:px-20">
 							<h2
 								id="hype-title"
 								className={"w-99 md:w-43.75 lg:w-62 uppercase text-[72px] md:text-[32px] lg:text-[45px] font-semibold tracking-tighter leading-18 md:leading-8 lg:leading-11 scale-y-105"}
@@ -205,11 +205,13 @@ export const Hero = () => {
 							manual <br/> programming</p>
 					</div>
 					
-					<Canvas camera={{position: [0, 0, 8], fov: 50}}>
-						<ambientLight intensity={1.5}/>
-						<directionalLight position={[3, 5, 2]} intensity={5}/>
-						<AnimatedCork/>
-					</Canvas>
+					<div id="canvas" className="absolute inset-0 ">
+						<Canvas camera={{position: [0, 0, 8], fov: 50}}>
+							<ambientLight intensity={1.5}/>
+							<directionalLight position={[3, 5, 2]} intensity={5}/>
+							<AnimatedCork/>
+						</Canvas>
+					</div>
 				
 				</div>
 			</section>
