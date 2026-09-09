@@ -182,7 +182,7 @@ export const Hero = () => {
 							to lift, insulate, and grip in real time. Korvo makes the mundane feel groundbreaking.</p>
 						
 						<div id="ai-hype"
-						     className="w-full absolute inset-0 py-10 px-5 opacity-0 md:right-10 md:left-10 z-20 flex flex-col md:flex-row justify-end md:items-center gap-50 md:gap-0 md:px-10 lg:px-20">
+						     className="w-full absolute inset-0 py-10 px-5 opacity-0 md:right-10 md:left-10 z-20 flex flex-col md:flex-row justify-end md:justify-between md:items-center gap-50 md:gap-0 md:px-10 lg:px-20">
 							<h2
 								id="hype-title"
 								className={"w-99 md:w-43.75 lg:w-62 uppercase text-[72px] md:text-[32px] lg:text-[45px] font-semibold tracking-tighter leading-18 md:leading-8 lg:leading-11 scale-y-105"}
