@@ -32,7 +32,7 @@ export const Navbar = () => {
 		const tl = gsap.timeline({
 			defaults: {
 				scrollTrigger: {
-					trigger: "#hero",
+					trigger: "#intro",
 					start: "top top",
 					end: "+=300",
 					scrub: true,
