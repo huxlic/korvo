@@ -10,7 +10,7 @@ const AnimatedCork = () => {
 	useGSAP(() => {
 		const tl = gsap.timeline({
 			scrollTrigger: {
-				trigger: "#hero",
+				trigger: "#intro",
 				start: "top top",
 				end: "bottom bottom",
 				scrub: 1,
