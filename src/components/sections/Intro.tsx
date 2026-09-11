@@ -39,7 +39,7 @@ export const Intro = () => {
 		})
 		
 		const hypeTitle = SplitText.create("#hype-title", {
-			type: "chars",
+			type: "words, chars",
 			charsClass: "opacity-0 inline-block",
 		})
 		const hypeDesc = SplitText.create("#hype-desc", {
@@ -117,7 +117,7 @@ export const Intro = () => {
 				duration: 1
 			}, "sync")
 			.from("#hype-title", {
-				yPercent: -40,
+				yPercent: -50,
 				ease: "circ.inOut"
 			}, "<")
 			.from("#hype-desc", {
@@ -164,7 +164,7 @@ export const Intro = () => {
 							and rebuilt by hux.
 						</p>
 						
-						<span id="dashline" className="w-[clamp(100%, 5vw, 100%)] h-px dashline"/>
+						<span id="dashline" className="w-full h-px dashline"/>
 						
 						<p id="intro-card-desc"
 						   className={"text-end text-[11px] lg:text-[15px] pt-[10%] font-medium tracking-tighter"}
@@ -182,16 +182,16 @@ export const Intro = () => {
 							to lift, insulate, and grip in real time. Korvo makes the mundane feel groundbreaking.</p>
 						
 						<div id="ai-hype"
-						     className="w-full absolute inset-0 py-10 px-5 opacity-0 md:right-10 md:left-10 z-20 flex flex-col md:flex-row justify-end md:justify-between md:items-center gap-60 md:gap-0 md:px-10 lg:px-20">
+						     className="w-full absolute inset-0 pt-24 md:pt-10 pb-10  px-5 opacity-0 md:right-10 md:left-10 z-20 flex flex-col md:flex-row justify-between md:items-center md:gap-0 md:px-10 lg:px-20">
 							<h2
 								id="hype-title"
-								className={"w-full sm:w-99 md:w-43.75 lg:w-62 uppercase text-[70px] md:text-[32px] lg:text-[45px] font-semibold tracking-tighter leading-18 md:leading-8 lg:leading-11 scale-y-105"}
+								className={"w-full sm:w-99 md:w-43.75 lg:w-62 uppercase text-[50px] sm:text-[70px] md:text-[32px] lg:text-[45px] font-semibold tracking-tighter leading-14 sm:leading-18 md:leading-8 lg:leading-11 scale-y-105"}
 								aria-label={"isn’t just a coaster."}>isn’t just
 								a coaster.</h2>
 							
 							<p
 								id="hype-desc"
-								className={"sm:w-154 md:w-75 lg:w-65 text-[34px] md:text-[18px] lg:text-[25px] text-end md:text-start leading-10 md:leading-6 lg:leading-8 tracking-tighter font-medium scale-y-105"}
+								className={"sm:w-154 md:w-75 lg:w-65 text-[24px] sm:text-[34px] md:text-[18px] lg:text-[25px] text-end md:text-start leading-8 sm:leading-10 md:leading-6 lg:leading-8 tracking-tighter font-medium scale-y-105"}
 								aria-label={"Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure."}>
 								Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure.
 							</p>
@@ -207,14 +207,11 @@ export const Intro = () => {
 					
 					<div id="canvas" className="absolute inset-0 z-5">
 						<Canvas camera={{position: [0, 0, 8], fov: 50}}>
-							{/*<Suspense fallback={<div>Nothing to show</div>}>*/}
 							<ambientLight intensity={1.5}/>
 							<directionalLight position={[3, 5, 2]} intensity={5}/>
 							<AnimatedCork/>
-							{/*</Suspense>*/}
 						</Canvas>
 					</div>
-				
 				</div>
 			</section>
 		</>
