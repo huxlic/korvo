@@ -7,6 +7,7 @@ import {useGSAP} from "@gsap/react";
 import {useRef} from "react";
 import {useMediaQuery} from "react-responsive";
 import useMenuStore from "../../store/useMenuStore.ts";
+import handleNavClick from "../../utils/handleNavClick.ts";
 
 gsap.registerPlugin(SplitText);
 
@@ -58,8 +59,7 @@ export const Navbar = () => {
 					yPercent: -50,
 					transformOrigin: isSmDown ? "left top" : isMdDown ? "left center" : "left top",
 					duration: 1,
-					ease: "power2.inOut",
-					// delay: 1
+					ease: "power2.inOut"
 				}
 			)
 			.to(
@@ -84,7 +84,8 @@ export const Navbar = () => {
 						</p>
 						
 						<div className="sm:absolute top-6 md:top-8 lg:top-10 w-full">
-							<a ref={wordmarkRef} href="#hero" className="block w-full ">
+							<a ref={wordmarkRef} onClick={(e) => handleNavClick(e, "#intro")} href="#intro"
+							   className="block w-full ">
 								<Wordmark/>
 							</a>
 						</div>

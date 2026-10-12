@@ -18,9 +18,9 @@ const AnimatedCork = () => {
 		});
 		
 		tl.to(corkRef.current.scale, {
-				x: 0.6,
-				y: 0.6,
-				z: 0.6,
+				x: 0.5,
+				y: 0.5,
+				z: 0.5,
 				duration: 1,
 			})
 			.to(corkRef.current.rotation, {
@@ -34,9 +34,9 @@ const AnimatedCork = () => {
 				duration: 1,
 			})
 			.to(corkRef.current.scale, {
-				x: 0.2,
-				y: 0.2,
-				z: 0.2,
+				x: 0.24,
+				y: 0.24,
+				z: 0.24,
 				duration: 1,
 			});
 	}, []);

@@ -6,9 +6,8 @@ import {ScrollSmoother} from "gsap/ScrollSmoother";
 import gsap from "gsap";
 import {MdLinks} from "./components/ui/MdLinks.tsx";
 import {useGSAP} from "@gsap/react";
-import Features from "./components/sections/Features.tsx";
 
-gsap.registerPlugin(SplitText)
+gsap.registerPlugin(SplitText);
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const App = () => {
@@ -28,7 +27,6 @@ const App = () => {
 			>
 				<div id="smooth-content" className="w-full ">
 					<Intro/>
-					<Features/>
 				</div>
 			</div>
 			<MdLinks/>

@@ -23,7 +23,7 @@ export const Intro = () => {
 			scrollTrigger: {
 				trigger: "#intro",
 				start: "top top",
-				end: "+=1000",
+				end: "bottom bottom",
 				pin: "#intro-stage",
 				pinSpacing: false,
 				scrub: 1,
@@ -34,8 +34,7 @@ export const Intro = () => {
 		
 		const introCopy = SplitText.create("#intro-copy", {
 			type: "lines",
-			charsClass: "w-max",
-			mask: "lines"
+			charsClass: "w-max"
 		})
 		
 		const hypeTitle = SplitText.create("#hype-title", {
@@ -58,7 +57,6 @@ export const Intro = () => {
 			mask: "lines"
 		})
 		
-		
 		tl.to("#canvas", {
 				backgroundColor: "#1A1513",
 				backdropFilter: "blur(4px)"
@@ -77,7 +75,7 @@ export const Intro = () => {
 				},
 				duration: 1,
 				ease: "circ.in"
-			}, "<10%")
+			}, "<")
 			.to(introCardDesc.lines, {
 				yPercent: 100,
 				stagger: {
@@ -100,7 +98,7 @@ export const Intro = () => {
 			})
 			.to("#ai-hype", {
 				opacity: 1
-			})
+			}, "<10%")
 			.to(hypeTitle.chars, {
 				opacity: 1,
 				stagger: {
@@ -117,31 +115,32 @@ export const Intro = () => {
 				duration: 1
 			}, "sync")
 			.from("#hype-title", {
-				yPercent: -50,
+				xPercent: 50,
 				ease: "circ.inOut"
 			}, "<")
 			.from("#hype-desc", {
-				yPercent: 50,
+				xPercent: -50,
 				ease: "circ.inOut"
 			}, "<")
 			.from("#drive", {
 				opacity: 0,
 				xPercent: 100
-				
 			})
 			.to("#hype-title", {
 				opacity: 0,
-				yPercent: 40,
+				xPercent: -40,
 				ease: "circ.inOut"
 			})
 			.to("#hype-desc", {
 				opacity: 0,
-				yPercent: -40,
+				xPercent: 40,
 				ease: "circ.inOut"
 			}, "<")
 			.to("#canvas", {
 				backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"
-			})
+			}).from("#powered-by", {
+			opacity: 0
+		})
 		
 	}, {dependencies: [fontsReady], revertOnUpdate: true})
 	
@@ -175,7 +174,7 @@ export const Intro = () => {
 					</div>
 					
 					<div id="intro-content"
-					     className="absolute z-9 inset-0 flex items-center justify-between px-10 overflow-hidden">
+					     className="absolute z-9 inset-0 flex items-center justify-between px-10">
 						<p id="intro-copy"
 						   className={"absolute z-10 right-10 w-74 lg:w-102 leading-6 text-[18px] lg:leading-normal lg:text-[20px] lg:text-[24px] font-medium tracking-tighter"}
 						   aria-label={"Optimized to lift, insulate, and grip in real time. korvo makes the mundane feel groundbreaking."}>Optimized
@@ -203,6 +202,19 @@ export const Intro = () => {
 						<span className="absolute left-0 top-0 w-full h-px dashline"/>
 						<p className={"uppercase tracking-tighter font-semibold text-[11px] text-end mt-[20%] leading-none"}>*
 							manual <br/> programming</p>
+					</div>
+					
+					<div id="powered-by" className="powered-by w-max absolute inset-0 z-10 flex flex-col justify-between items-center justify-self-center py-20">
+						<div className="flex flex-col justify-center items-end leading-none">
+							<p className={"text-[102px] font-semibold flex tracking-tighter"}>Powered by ML<span className={"text-[32px] my-4"}>*</span></p>
+							<span className={"h-max text-ember-accent text-[21px] font-semibold tracking-tighter"}>KORVO-1</span>
+						</div>
+						
+						<p className={"w-full font-semibold uppercase tracking-tighter leading-5 flex justify-end text-end"}>
+							We asked for a coaster.<br/>
+							AI pitched a platform.<br/>
+							Seed round closed.
+						</p>
 					</div>
 					
 					<div id="canvas" className="absolute inset-0 z-5">
