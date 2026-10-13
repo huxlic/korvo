@@ -65,11 +65,10 @@ export const Intro = () => {
 				backgroundColor: "#1A1513",
 				backdropFilter: "blur(4px)"
 			})
-			.to("#bg-layer", {
-				scale: 0.5,
-				rotation: 10,
+			.to("#bg-layer",{
+				scale: 0.3,
+				rotation: 20,
 				ease: "none",
-				transformOrigin: "bottom right",
 				scrollTrigger: {
 					trigger: "#intro",
 					start: "top top",
@@ -163,12 +162,11 @@ export const Intro = () => {
 			<section id="intro" className={"relative w-full h-[300vh]"}>
 				<div
 					id="intro-stage"
-					className={"top-0 h-dvh bg-cover bg-bottom-right overflow-hidden"}
-					// style={{backgroundImage: `url(${cutting_mat})`}}
+					className={"top-0 h-dvh overflow-hidden"}
 				>
 					<div
 						id="bg-layer"
-						className="absolute inset-0 bg-cover bg-bottom-right "
+						className="absolute inset-0 scale-105 bg-no-repeat bg-cover bg-bottom-left  "
 						style={{ backgroundImage: `url(${cutting_mat})` }}
 					/>
 					<IntroCard/>
