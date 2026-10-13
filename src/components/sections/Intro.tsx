@@ -59,9 +59,8 @@ export const Intro = () => {
 			mask: "lines"
 		})
 		
-		const poweredByMl = SplitText.create("#powered-by-ml", {
+		const poweredByAi = SplitText.create("#powered-by-ai", {
 			type: "words, chars",
-			charsClass: "inline-block",
 			
 		})
 		
@@ -170,7 +169,7 @@ export const Intro = () => {
 			.to("#canvas", {
 				backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"
 			})
-			.from(poweredByMl.chars, {
+			.from(poweredByAi.chars, {
 				opacity: 0,
 				stagger: 0.1,
 				scale: 1.1,
@@ -185,7 +184,7 @@ export const Intro = () => {
 			})
 			.from(aiCooked.lines, {
 				yPercent: 100,
-				stagger: 0.1,
+				stagger: 0.15,
 			}, "<")
 		
 		

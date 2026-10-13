@@ -12,7 +12,7 @@ const IntroCard = () => {
 				and rebuilt by hux.
 			</p>
 			
-			<span id="dashline" className="w-full h-px dashline"/>
+			<span id="dashline" className="w-full h-px dashline will-change-transform"/>
 			
 			<p id="intro-card-desc"
 			   className={"text-end text-[11px] lg:text-[15px] pt-[10%] font-medium tracking-tighter"}

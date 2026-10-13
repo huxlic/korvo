@@ -43,6 +43,16 @@ export const Navbar = () => {
 			},
 		});
 		
+		let origin: string;
+		
+		if (isSmDown) {
+			origin = "left top"
+		} else if (isMdDown) {
+			origin = "left center"
+		} else {
+			origin = "left top"
+		}
+		
 		tl.to(text.words, {
 				yPercent: -100,
 				stagger: 0.05,
@@ -57,7 +67,7 @@ export const Navbar = () => {
 					scale: () => 94 / wordmark.offsetWidth,
 					top: "50%",
 					yPercent: -50,
-					transformOrigin: isSmDown ? "left top" : isMdDown ? "left center" : "left top",
+					transformOrigin: origin,
 					duration: 1,
 					ease: "power2.inOut"
 				}
@@ -72,12 +82,12 @@ export const Navbar = () => {
 	
 	return (
 		<>
-			<header className={"px-4 md:px-8 lg:px-10 py-0 md:py-4 lg:py-6 fixed top-0 w-full z-50"}>
+			<header className={"px-4 sm:px-10 py-0 md:py-4 lg:py-6 fixed top-0 w-full z-50"}>
 				<nav className={"relative w-full flex justify-between items-center box-border"}>
 					
 					<div
-						className="flex flex-col items-end sm:block left-0 pt-16 sm:pt-0 sm:top-4 md:top-0 sm:relative z-60 w-full sm:w-[clamp(326px,45vw,550px)]">
-						<div className="hidden sm:block w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full bg-warm-cream"
+						className="flex flex-col items-end sm:block left-0 pt-16 sm:pt-0 sm:top-4 md:top-0 sm:relative z-60 w-full h-max sm:w-[clamp(326px,45vw,550px)]">
+						<div className="hidden sm:block w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full bg-warm-cream will-change-transform"
 						     ref={dotRef}/>
 						<p className={"text text-[clamp(10px,3vw,24px)] sm:text-[10px] md:text-[13px] lg:text-[16px] sm:absolute right-0 top-full w-max uppercase font-semibold tracking-tighter overflow-hidden "}
 						   aria-label={"Trained on stains. Deployed on tables."}>Trained on stains. Deployed on tables.
@@ -85,7 +95,7 @@ export const Navbar = () => {
 						
 						<div className="sm:absolute top-6 md:top-8 lg:top-10 w-full">
 							<a ref={wordmarkRef} onClick={(e) => handleNavClick(e, "#intro")} href="#intro"
-							   className="block w-full ">
+							   className="block w-full will-change-transform">
 								<Wordmark/>
 							</a>
 						</div>
