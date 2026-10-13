@@ -9,6 +9,7 @@ import {useEffect, useState} from "react";
 import IntroCard from "../ui/intro/IntroCard.tsx";
 import IntroContent from "../ui/intro/IntroContent.tsx";
 import Drive from "../ui/intro/Drive.tsx";
+import PoweredBy from "../ui/intro/PoweredBy.tsx";
 
 export const Intro = () => {
 	const {setActiveSection} = useNavStore();
@@ -19,7 +20,6 @@ export const Intro = () => {
 	}, []);
 	
 	useGSAP(() => {
-		
 		if (!fontsReady) return;
 		
 		const tl = gsap.timeline({
@@ -185,7 +185,7 @@ export const Intro = () => {
 			})
 			.from(aiCooked.lines, {
 				yPercent: 100,
-				stagger: 0.05,
+				stagger: 0.1,
 			}, "<")
 		
 		
@@ -199,33 +199,13 @@ export const Intro = () => {
 			>
 				<div
 					id="bg-layer"
-					className="absolute inset-0 scale-105 bg-no-repeat bg-cover bg-bottom-left  "
+					className="absolute inset-0 scale-105 bg-no-repeat bg-cover bg-bottom-right "
 					style={{backgroundImage: `url(${cutting_mat})`}}
 				/>
 				<IntroCard/>
 				<IntroContent/>
 				<Drive/>
-				
-				<div id="powered-by"
-				     className="powered-by w-max absolute inset-0 z-10 flex flex-col justify-between items-center justify-self-center py-20">
-					<div className="flex flex-col justify-center items-end leading-none">
-						<div className="flex items-start">
-							<p id="powered-by-ml" className={"text-[102px] font-semibold tracking-tighter"}>Powered by
-								ML</p>
-							<span id="asterisk" className={"text-[35px] font-semibold leading-none mt-3"}>*</span>
-						</div>
-						<span
-							id="korvo-1"
-							className={"h-max overflow-hidden leading-none text-ember-accent text-[21px] font-semibold tracking-tighter"}>KORVO-1</span>
-					</div>
-					
-					<p id="ai-cooked"
-					   className={"w-full font-semibold uppercase tracking-tighter leading-5 text-end"}>
-						We asked for a coaster.<br/>
-						AI pitched a platform.<br/>
-						Seed round closed.
-					</p>
-				</div>
+				<PoweredBy/>
 				
 				<div id="canvas" className="absolute inset-0 z-5">
 					<Canvas camera={{position: [0, 0, 8], fov: 50}}>
