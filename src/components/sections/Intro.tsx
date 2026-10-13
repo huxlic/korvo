@@ -6,6 +6,9 @@ import {useGSAP} from "@gsap/react";
 import {SplitText} from "gsap/SplitText";
 import useNavStore from "../../store/useNavStore.ts";
 import {useEffect, useState} from "react";
+import IntroCard from "../ui/intro/IntroCard.tsx";
+import IntroContent from "../ui/intro/IntroContent.tsx";
+import Drive from "../ui/intro/Drive.tsx";
 
 export const Intro = () => {
 	const {setActiveSection} = useNavStore();
@@ -57,10 +60,21 @@ export const Intro = () => {
 			mask: "lines"
 		})
 		
-		tl.to("#canvas", {
-				backgroundColor: "#1A1513",
-				backdropFilter: "blur(4px)"
+		tl
+			.to("#canvas", {
+				// backgroundColor: "#1A1513",
+				// backdropFilter: "blur(4px)"
 			})
+			.to("#bg-layer", {
+				scale: 0.85,
+				rotation: 5,
+				ease: "none",
+				scrollTrigger: {
+					trigger: "#intro-stage",
+					start: "top top",
+					scrub: true,
+				},
+			}, "<")
 			.to(introCopy.lines, {
 				x: 40,
 				filter: "blur(8px)",
@@ -150,64 +164,24 @@ export const Intro = () => {
 				<div
 					id="intro-stage"
 					className={"top-0 h-dvh bg-cover bg-bottom-right overflow-hidden"}
-					style={{backgroundImage: `url(${cutting_mat})`}}
+					// style={{backgroundImage: `url(${cutting_mat})`}}
 				>
 					<div
-						id="intro-card"
-						className="flex flex-col justify-between absolute z-10 ml-8 lg:ml-10 left-0 bottom-4 lg:bottom-6 box-border px-3 py-3 lg:px-4 lg:py-5 w-43.25 lg:w-60 bg-linear-to-br from-white/15 to-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.15)] border border-[#FFFFFF26] backdrop-blur-lg backdrop-saturate-100 ">
-						<p id="intro-card-header"
-						   aria-label={"lusion's design, deconstructed, studied and rebuilt by hux."}
-						   className={"text-[16px] h-max lg:text-[20px] pb-[25%] uppercase font-semibold scale-y-105 tracking-tighter leading-4.5 lg:leading-6 overflow-hidden"}>lusion's
-							design,
-							deconstructed, studied
-							and rebuilt by hux.
-						</p>
-						
-						<span id="dashline" className="w-full h-px dashline"/>
-						
-						<p id="intro-card-desc"
-						   className={"text-end text-[11px] lg:text-[15px] pt-[10%] font-medium tracking-tighter"}
-						   aria-label={"Quite possibly the most unnecessarily advanced coaster."}>Quite
-							possibly the most
-							unnecessarily
-							advanced coaster.</p>
-					</div>
+						id="bg-layer"
+						className="absolute inset-0 bg-cover bg-bottom-right"
+						style={{ backgroundImage: `url(${cutting_mat})` }}
+					/>
+					<IntroCard/>
+					<IntroContent/>
+					<Drive/>
 					
-					<div id="intro-content"
-					     className="absolute z-9 inset-0 flex items-center justify-between px-10">
-						<p id="intro-copy"
-						   className={"absolute z-10 right-10 w-74 lg:w-102 leading-6 text-[18px] lg:leading-normal lg:text-[20px] lg:text-[24px] font-medium tracking-tighter"}
-						   aria-label={"Optimized to lift, insulate, and grip in real time. korvo makes the mundane feel groundbreaking."}>Optimized
-							to lift, insulate, and grip in real time. Korvo makes the mundane feel groundbreaking.</p>
-						
-						<div id="ai-hype"
-						     className="w-full absolute inset-0 pt-24 md:pt-10 pb-10  px-5 opacity-0 md:right-10 md:left-10 z-20 flex flex-col md:flex-row justify-between md:items-center md:gap-0 md:px-10 lg:px-20">
-							<h2
-								id="hype-title"
-								className={"w-full sm:w-99 md:w-43.75 lg:w-62 uppercase text-[50px] sm:text-[70px] md:text-[32px] lg:text-[45px] font-semibold tracking-tighter leading-14 sm:leading-18 md:leading-8 lg:leading-11 scale-y-105"}
-								aria-label={"isn’t just a coaster."}>isn’t just
-								a coaster.</h2>
-							
-							<p
-								id="hype-desc"
-								className={"sm:w-154 md:w-75 lg:w-65 text-[24px] sm:text-[34px] md:text-[18px] lg:text-[25px] text-end md:text-start leading-8 sm:leading-10 md:leading-6 lg:leading-8 tracking-tighter font-medium scale-y-105"}
-								aria-label={"Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure."}>
-								Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure.
-							</p>
-						</div>
-					
-					</div>
-					
-					<div id="drive" className="absolute bottom-5 z-10 right-8">
-						<span className="absolute left-0 top-0 w-full h-px dashline"/>
-						<p className={"uppercase tracking-tighter font-semibold text-[11px] text-end mt-[20%] leading-none"}>*
-							manual <br/> programming</p>
-					</div>
-					
-					<div id="powered-by" className="powered-by w-max absolute inset-0 z-10 flex flex-col justify-between items-center justify-self-center py-20">
+					<div id="powered-by"
+					     className="powered-by w-max absolute inset-0 z-10 flex flex-col justify-between items-center justify-self-center py-20">
 						<div className="flex flex-col justify-center items-end leading-none">
-							<p className={"text-[102px] font-semibold flex tracking-tighter"}>Powered by ML<span className={"text-[32px] my-4"}>*</span></p>
-							<span className={"h-max text-ember-accent text-[21px] font-semibold tracking-tighter"}>KORVO-1</span>
+							<p className={"text-[102px] font-semibold flex tracking-tighter"}>Powered by ML<span
+								className={"text-[32px] my-4"}>*</span></p>
+							<span
+								className={"h-max text-ember-accent text-[21px] font-semibold tracking-tighter"}>KORVO-1</span>
 						</div>
 						
 						<p className={"w-full font-semibold uppercase tracking-tighter leading-5 flex justify-end text-end"}>
