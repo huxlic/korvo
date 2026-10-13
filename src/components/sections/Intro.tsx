@@ -16,7 +16,8 @@ export const Intro = () => {
 	const [fontsReady, setFontsReady] = useState(false);
 	
 	useEffect(() => {
-		document.fonts.ready.then(() => setFontsReady(true));
+		document.fonts.ready.then(() => setFontsReady(true)).catch((err) => console.log(err)
+		);
 	}, []);
 	
 	useGSAP(() => {
