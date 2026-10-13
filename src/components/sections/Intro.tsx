@@ -6,24 +6,28 @@ import {useGSAP} from "@gsap/react";
 import {SplitText} from "gsap/SplitText";
 import useNavStore from "../../store/useNavStore.ts";
 import {useEffect, useState} from "react";
+import IntroCard from "../ui/intro/IntroCard.tsx";
+import IntroContent from "../ui/intro/IntroContent.tsx";
+import Drive from "../ui/intro/Drive.tsx";
+import PoweredBy from "../ui/intro/PoweredBy.tsx";
 
 export const Intro = () => {
 	const {setActiveSection} = useNavStore();
 	const [fontsReady, setFontsReady] = useState(false);
 	
 	useEffect(() => {
-		document.fonts.ready.then(() => setFontsReady(true));
+		document.fonts.ready.then(() => setFontsReady(true)).catch((err) => console.log(err)
+		);
 	}, []);
 	
 	useGSAP(() => {
-		
 		if (!fontsReady) return;
 		
 		const tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: "#intro",
 				start: "top top",
-				end: "+=1000",
+				end: "bottom bottom",
 				pin: "#intro-stage",
 				pinSpacing: false,
 				scrub: 1,
@@ -31,11 +35,9 @@ export const Intro = () => {
 			}
 		});
 		
-		
 		const introCopy = SplitText.create("#intro-copy", {
 			type: "lines",
-			charsClass: "w-max",
-			mask: "lines"
+			charsClass: "w-max"
 		})
 		
 		const hypeTitle = SplitText.create("#hype-title", {
@@ -58,11 +60,38 @@ export const Intro = () => {
 			mask: "lines"
 		})
 		
+		const poweredByAi = SplitText.create("#powered-by-ai", {
+			type: "words, chars",
+			
+		})
 		
-		tl.to("#canvas", {
+		const korvoOne = SplitText.create("#korvo-1", {
+			type: "chars",
+			charsClass: "inline-block",
+			mask: "lines"
+		})
+		
+		const aiCooked = SplitText.create("#ai-cooked", {
+			type: "lines",
+			charsClass: "w-full block",
+			mask: "lines"
+		})
+		
+		tl
+			.to("#canvas", {
 				backgroundColor: "#1A1513",
 				backdropFilter: "blur(4px)"
 			})
+			.to("#bg-layer", {
+				scale: 0.3,
+				rotation: 20,
+				ease: "none",
+				scrollTrigger: {
+					trigger: "#intro",
+					start: "top top",
+					scrub: true,
+				},
+			}, "<")
 			.to(introCopy.lines, {
 				x: 40,
 				filter: "blur(8px)",
@@ -77,7 +106,7 @@ export const Intro = () => {
 				},
 				duration: 1,
 				ease: "circ.in"
-			}, "<10%")
+			}, "<")
 			.to(introCardDesc.lines, {
 				yPercent: 100,
 				stagger: {
@@ -100,7 +129,7 @@ export const Intro = () => {
 			})
 			.to("#ai-hype", {
 				opacity: 1
-			})
+			}, "<10%")
 			.to(hypeTitle.chars, {
 				opacity: 1,
 				stagger: {
@@ -117,103 +146,75 @@ export const Intro = () => {
 				duration: 1
 			}, "sync")
 			.from("#hype-title", {
-				yPercent: -50,
+				xPercent: 50,
 				ease: "circ.inOut"
 			}, "<")
 			.from("#hype-desc", {
-				yPercent: 50,
+				xPercent: -50,
 				ease: "circ.inOut"
 			}, "<")
 			.from("#drive", {
 				opacity: 0,
 				xPercent: 100
-				
 			})
 			.to("#hype-title", {
 				opacity: 0,
-				yPercent: 40,
+				xPercent: -40,
 				ease: "circ.inOut"
 			})
 			.to("#hype-desc", {
 				opacity: 0,
-				yPercent: -40,
+				xPercent: 40,
 				ease: "circ.inOut"
 			}, "<")
 			.to("#canvas", {
 				backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"
 			})
+			.from(poweredByAi.chars, {
+				opacity: 0,
+				stagger: 0.1,
+				scale: 1.1,
+				filter: "blur(12px)",
+			})
+			.from(korvoOne.chars, {
+				yPercent: 100,
+				stagger: 0.08,
+			}, "<20%")
+			.from("#asterisk", {
+				scale: 0,
+			})
+			.from(aiCooked.lines, {
+				yPercent: 100,
+				stagger: 0.15,
+			}, "<")
+		
 		
 	}, {dependencies: [fontsReady], revertOnUpdate: true})
 	
 	return (
-		<>
-			<section id="intro" className={"relative w-full h-[300vh]"}>
+		<section id="intro" className={"relative w-full h-[300vh]"}>
+			<div
+				id="intro-stage"
+				className={"top-0 h-dvh overflow-hidden"}
+			>
 				<div
-					id="intro-stage"
-					className={"top-0 h-dvh bg-cover bg-bottom-right overflow-hidden"}
+					id="bg-layer"
+					className="absolute inset-0 scale-105 bg-no-repeat bg-cover bg-bottom-right "
 					style={{backgroundImage: `url(${cutting_mat})`}}
-				>
-					<div
-						id="intro-card"
-						className="flex flex-col justify-between absolute z-10 ml-8 lg:ml-10 left-0 bottom-4 lg:bottom-6 box-border px-3 py-3 lg:px-4 lg:py-5 w-43.25 lg:w-60 bg-linear-to-br from-white/15 to-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.15)] border border-[#FFFFFF26] backdrop-blur-lg backdrop-saturate-100 ">
-						<p id="intro-card-header"
-						   aria-label={"lusion's design, deconstructed, studied and rebuilt by hux."}
-						   className={"text-[16px] h-max lg:text-[20px] pb-[25%] uppercase font-semibold scale-y-105 tracking-tighter leading-4.5 lg:leading-6 overflow-hidden"}>lusion's
-							design,
-							deconstructed, studied
-							and rebuilt by hux.
-						</p>
-						
-						<span id="dashline" className="w-full h-px dashline"/>
-						
-						<p id="intro-card-desc"
-						   className={"text-end text-[11px] lg:text-[15px] pt-[10%] font-medium tracking-tighter"}
-						   aria-label={"Quite possibly the most unnecessarily advanced coaster."}>Quite
-							possibly the most
-							unnecessarily
-							advanced coaster.</p>
-					</div>
-					
-					<div id="intro-content"
-					     className="absolute z-9 inset-0 flex items-center justify-between px-10 overflow-hidden">
-						<p id="intro-copy"
-						   className={"absolute z-10 right-10 w-74 lg:w-102 leading-6 text-[18px] lg:leading-normal lg:text-[20px] lg:text-[24px] font-medium tracking-tighter"}
-						   aria-label={"Optimized to lift, insulate, and grip in real time. korvo makes the mundane feel groundbreaking."}>Optimized
-							to lift, insulate, and grip in real time. Korvo makes the mundane feel groundbreaking.</p>
-						
-						<div id="ai-hype"
-						     className="w-full absolute inset-0 pt-24 md:pt-10 pb-10  px-5 opacity-0 md:right-10 md:left-10 z-20 flex flex-col md:flex-row justify-between md:items-center md:gap-0 md:px-10 lg:px-20">
-							<h2
-								id="hype-title"
-								className={"w-full sm:w-99 md:w-43.75 lg:w-62 uppercase text-[50px] sm:text-[70px] md:text-[32px] lg:text-[45px] font-semibold tracking-tighter leading-14 sm:leading-18 md:leading-8 lg:leading-11 scale-y-105"}
-								aria-label={"isn’t just a coaster."}>isn’t just
-								a coaster.</h2>
-							
-							<p
-								id="hype-desc"
-								className={"sm:w-154 md:w-75 lg:w-65 text-[24px] sm:text-[34px] md:text-[18px] lg:text-[25px] text-end md:text-start leading-8 sm:leading-10 md:leading-6 lg:leading-8 tracking-tighter font-medium scale-y-105"}
-								aria-label={"Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure."}>
-								Korvo isn't just a coaster. It's a paradigm shift in tabletop infrastructure.
-							</p>
-						</div>
-					
-					</div>
-					
-					<div id="drive" className="absolute bottom-5 z-10 right-8">
-						<span className="absolute left-0 top-0 w-full h-px dashline"/>
-						<p className={"uppercase tracking-tighter font-semibold text-[11px] text-end mt-[20%] leading-none"}>*
-							manual <br/> programming</p>
-					</div>
-					
-					<div id="canvas" className="absolute inset-0 z-5">
-						<Canvas camera={{position: [0, 0, 8], fov: 50}}>
-							<ambientLight intensity={1.5}/>
-							<directionalLight position={[3, 5, 2]} intensity={5}/>
-							<AnimatedCork/>
-						</Canvas>
-					</div>
+				/>
+				<IntroCard/>
+				<IntroContent/>
+				<Drive/>
+				<PoweredBy/>
+				
+				<div id="canvas" className="absolute inset-0 z-5">
+					<Canvas camera={{position: [0, 0, 8], fov: 50}}>
+						<ambientLight intensity={1.5}/>
+						<directionalLight position={[3, 5, 2]} intensity={5}/>
+						<AnimatedCork/>
+					</Canvas>
 				</div>
-			</section>
-		</>
+			</div>
+		</section>
 	);
 };
