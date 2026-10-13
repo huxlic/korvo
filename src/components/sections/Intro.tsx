@@ -174,7 +174,7 @@ export const Intro = () => {
 				opacity: 0,
 				stagger: 0.1,
 				scale: 1.1,
-				filter: "blur(10px)",
+				filter: "blur(12px)",
 			})
 			.from(korvoOne.chars, {
 				yPercent: 100,
