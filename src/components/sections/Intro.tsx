@@ -62,15 +62,16 @@ export const Intro = () => {
 		
 		tl
 			.to("#canvas", {
-				// backgroundColor: "#1A1513",
-				// backdropFilter: "blur(4px)"
+				backgroundColor: "#1A1513",
+				backdropFilter: "blur(4px)"
 			})
 			.to("#bg-layer", {
-				scale: 0.85,
-				rotation: 5,
+				scale: 0.5,
+				rotation: 10,
 				ease: "none",
+				transformOrigin: "bottom right",
 				scrollTrigger: {
-					trigger: "#intro-stage",
+					trigger: "#intro",
 					start: "top top",
 					scrub: true,
 				},
@@ -159,7 +160,6 @@ export const Intro = () => {
 	}, {dependencies: [fontsReady], revertOnUpdate: true})
 	
 	return (
-		<>
 			<section id="intro" className={"relative w-full h-[300vh]"}>
 				<div
 					id="intro-stage"
@@ -168,7 +168,7 @@ export const Intro = () => {
 				>
 					<div
 						id="bg-layer"
-						className="absolute inset-0 bg-cover bg-bottom-right"
+						className="absolute inset-0 bg-cover bg-bottom-right "
 						style={{ backgroundImage: `url(${cutting_mat})` }}
 					/>
 					<IntroCard/>
@@ -200,6 +200,5 @@ export const Intro = () => {
 					</div>
 				</div>
 			</section>
-		</>
 	);
 };
