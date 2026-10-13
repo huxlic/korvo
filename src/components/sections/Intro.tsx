@@ -71,6 +71,12 @@ export const Intro = () => {
 			mask: "lines"
 		})
 		
+		const aiCooked = SplitText.create("#ai-cooked", {
+			type: "lines",
+			charsClass: "w-full block",
+			mask: "lines"
+		})
+		
 		tl
 			.to("#canvas", {
 				backgroundColor: "#1A1513",
@@ -177,7 +183,11 @@ export const Intro = () => {
 			.from("#asterisk", {
 				scale: 0,
 			})
-			
+			.from(aiCooked.lines, {
+				yPercent: 100,
+				stagger: 0.05,
+			}, "<")
+		
 		
 	}, {dependencies: [fontsReady], revertOnUpdate: true})
 	
@@ -209,7 +219,8 @@ export const Intro = () => {
 							className={"h-max overflow-hidden leading-none text-ember-accent text-[21px] font-semibold tracking-tighter"}>KORVO-1</span>
 					</div>
 					
-					<p className={"w-full font-semibold uppercase tracking-tighter leading-5 flex justify-end text-end"}>
+					<p id="ai-cooked"
+					   className={"w-full font-semibold uppercase tracking-tighter leading-5 text-end"}>
 						We asked for a coaster.<br/>
 						AI pitched a platform.<br/>
 						Seed round closed.
