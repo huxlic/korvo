@@ -34,7 +34,6 @@ export const Intro = () => {
 			}
 		});
 		
-		
 		const introCopy = SplitText.create("#intro-copy", {
 			type: "lines",
 			charsClass: "w-max"
@@ -60,12 +59,24 @@ export const Intro = () => {
 			mask: "lines"
 		})
 		
+		const poweredByMl = SplitText.create("#powered-by-ml", {
+			type: "words, chars",
+			charsClass: "inline-block",
+			
+		})
+		
+		const korvoOne = SplitText.create("#korvo-1", {
+			type: "chars",
+			charsClass: "inline-block",
+			mask: "lines"
+		})
+		
 		tl
 			.to("#canvas", {
 				backgroundColor: "#1A1513",
 				backdropFilter: "blur(4px)"
 			})
-			.to("#bg-layer",{
+			.to("#bg-layer", {
 				scale: 0.3,
 				rotation: 20,
 				ease: "none",
@@ -152,51 +163,67 @@ export const Intro = () => {
 			}, "<")
 			.to("#canvas", {
 				backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"
-			}).from("#powered-by", {
-			opacity: 0
-		})
+			})
+			.from(poweredByMl.chars, {
+				opacity: 0,
+				stagger: 0.1,
+				scale: 1.1,
+				filter: "blur(10px)",
+			})
+			.from(korvoOne.chars, {
+				yPercent: 100,
+				stagger: 0.08,
+			}, "<20%")
+			.from("#asterisk", {
+				scale: 0,
+			})
+			
 		
 	}, {dependencies: [fontsReady], revertOnUpdate: true})
 	
 	return (
-			<section id="intro" className={"relative w-full h-[300vh]"}>
+		<section id="intro" className={"relative w-full h-[300vh]"}>
+			<div
+				id="intro-stage"
+				className={"top-0 h-dvh overflow-hidden"}
+			>
 				<div
-					id="intro-stage"
-					className={"top-0 h-dvh overflow-hidden"}
-				>
-					<div
-						id="bg-layer"
-						className="absolute inset-0 scale-105 bg-no-repeat bg-cover bg-bottom-left  "
-						style={{ backgroundImage: `url(${cutting_mat})` }}
-					/>
-					<IntroCard/>
-					<IntroContent/>
-					<Drive/>
-					
-					<div id="powered-by"
-					     className="powered-by w-max absolute inset-0 z-10 flex flex-col justify-between items-center justify-self-center py-20">
-						<div className="flex flex-col justify-center items-end leading-none">
-							<p className={"text-[102px] font-semibold flex tracking-tighter"}>Powered by ML<span
-								className={"text-[32px] my-4"}>*</span></p>
-							<span
-								className={"h-max text-ember-accent text-[21px] font-semibold tracking-tighter"}>KORVO-1</span>
+					id="bg-layer"
+					className="absolute inset-0 scale-105 bg-no-repeat bg-cover bg-bottom-left  "
+					style={{backgroundImage: `url(${cutting_mat})`}}
+				/>
+				<IntroCard/>
+				<IntroContent/>
+				<Drive/>
+				
+				<div id="powered-by"
+				     className="powered-by w-max absolute inset-0 z-10 flex flex-col justify-between items-center justify-self-center py-20">
+					<div className="flex flex-col justify-center items-end leading-none">
+						<div className="flex items-start">
+							<p id="powered-by-ml" className={"text-[102px] font-semibold tracking-tighter"}>Powered by
+								ML</p>
+							<span id="asterisk" className={"text-[35px] font-semibold leading-none mt-3"}>*</span>
 						</div>
-						
-						<p className={"w-full font-semibold uppercase tracking-tighter leading-5 flex justify-end text-end"}>
-							We asked for a coaster.<br/>
-							AI pitched a platform.<br/>
-							Seed round closed.
-						</p>
+						<span
+							id="korvo-1"
+							className={"h-max overflow-hidden leading-none text-ember-accent text-[21px] font-semibold tracking-tighter"}>KORVO-1</span>
 					</div>
 					
-					<div id="canvas" className="absolute inset-0 z-5">
-						<Canvas camera={{position: [0, 0, 8], fov: 50}}>
-							<ambientLight intensity={1.5}/>
-							<directionalLight position={[3, 5, 2]} intensity={5}/>
-							<AnimatedCork/>
-						</Canvas>
-					</div>
+					<p className={"w-full font-semibold uppercase tracking-tighter leading-5 flex justify-end text-end"}>
+						We asked for a coaster.<br/>
+						AI pitched a platform.<br/>
+						Seed round closed.
+					</p>
 				</div>
-			</section>
+				
+				<div id="canvas" className="absolute inset-0 z-5">
+					<Canvas camera={{position: [0, 0, 8], fov: 50}}>
+						<ambientLight intensity={1.5}/>
+						<directionalLight position={[3, 5, 2]} intensity={5}/>
+						<AnimatedCork/>
+					</Canvas>
+				</div>
+			</div>
+		</section>
 	);
 };
