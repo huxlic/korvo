@@ -20,6 +20,7 @@ const PoweredBy = () => {
 				AI pitched a platform.<br/>
 				Seed round closed.
 			</p>
+			
 		</div>
 	)
 }

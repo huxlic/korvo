@@ -10,15 +10,20 @@ import IntroCard from "../ui/intro/IntroCard.tsx";
 import IntroContent from "../ui/intro/IntroContent.tsx";
 import Drive from "../ui/intro/Drive.tsx";
 import PoweredBy from "../ui/intro/PoweredBy.tsx";
+import {useMediaQuery} from "react-responsive";
 
 export const Intro = () => {
 	const {setActiveSection} = useNavStore();
 	const [fontsReady, setFontsReady] = useState(false);
+	const isMdUp = useMediaQuery({minWidth: 768});
 	
 	useEffect(() => {
 		document.fonts.ready.then(() => setFontsReady(true)).catch((err) => console.log(err)
 		);
 	}, []);
+	
+	const hypeX = isMdUp ? 0 : 40;
+	const hypeY = isMdUp ? 40 : 0;
 	
 	useGSAP(() => {
 		if (!fontsReady) return;
@@ -82,6 +87,7 @@ export const Intro = () => {
 				backgroundColor: "#1A1513",
 				backdropFilter: "blur(4px)"
 			})
+			
 			.to("#bg-layer", {
 				scale: 0.3,
 				rotation: 20,
@@ -92,19 +98,20 @@ export const Intro = () => {
 					scrub: true,
 				},
 			}, "<")
+			
 			.to(introCopy.lines, {
 				x: 40,
 				filter: "blur(8px)",
 				opacity: 0,
 				stagger: 0.05
 			}, "<")
+			
 			.to(introCardHeader.lines, {
 				yPercent: 100,
 				stagger: {
 					each: 0.05,
 					from: "end"
 				},
-				duration: 1,
 				ease: "circ.in"
 			}, "<")
 			.to(introCardDesc.lines, {
@@ -114,7 +121,6 @@ export const Intro = () => {
 					from: "end"
 				},
 				ease: "circ.in",
-				duration: 1,
 			}, "<")
 			.to("#dashline", {
 				width: 0,
@@ -124,48 +130,62 @@ export const Intro = () => {
 				opacity: 0,
 				display: "none",
 			})
+			
 			.to(introCopy.elements, {
 				display: "none"
 			})
-			.to("#ai-hype", {
-				opacity: 1
-			}, "<10%")
+			
 			.to(hypeTitle.chars, {
 				opacity: 1,
 				stagger: {
-					each: 0.025,
+					each: 0.25,
 					from: "end"
 				},
 				ease: "circ.in",
-				duration: 1
+				duration: 2
 			}, "sync")
 			.to(hypeDesc.chars, {
 				opacity: 1,
-				stagger: 0.025,
+				stagger: 0.05,
 				ease: "circ.in",
-				duration: 1
+				duration: 2
 			}, "sync")
+			
 			.from("#hype-title", {
-				xPercent: 50,
-				ease: "circ.inOut"
+				yPercent: -hypeY,
+				xPercent: hypeX,
+				ease: "circ.inOut",
+				duration: 8
 			}, "<")
 			.from("#hype-desc", {
-				xPercent: -50,
-				ease: "circ.inOut"
+				yPercent: hypeY,
+				xPercent: -hypeX,
+				ease: "circ.inOut",
+				duration: 8
 			}, "<")
+			
+			.from("#drive-dash", {
+				xPercent: 100,
+				duration: 8
+			})
 			.from("#drive", {
 				opacity: 0,
-				xPercent: 100
-			})
+				duration: 8
+			}, "<")
+			
 			.to("#hype-title", {
 				opacity: 0,
-				xPercent: -40,
-				ease: "circ.inOut"
-			})
+				yPercent: hypeY,
+				xPercent: -hypeX,
+				ease: "circ.inOut",
+				duration: 8
+			}, "+=2")
 			.to("#hype-desc", {
 				opacity: 0,
-				xPercent: 40,
-				ease: "circ.inOut"
+				yPercent: -hypeY,
+				xPercent: hypeX,
+				ease: "circ.inOut",
+				duration: 8
 			}, "<")
 			.to("#canvas", {
 				backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"
@@ -174,7 +194,7 @@ export const Intro = () => {
 				opacity: 0,
 				stagger: 0.1,
 				scale: 1.1,
-				filter: "blur(12px)",
+				filter: "blur(10px)",
 			})
 			.from(korvoOne.chars, {
 				yPercent: 100,
@@ -182,24 +202,28 @@ export const Intro = () => {
 			}, "<20%")
 			.from("#asterisk", {
 				scale: 0,
+				duration: 2,
+				ease: "circ.out"
 			})
+			
 			.from(aiCooked.lines, {
 				yPercent: 100,
 				stagger: 0.15,
+				duration: 2
 			}, "<")
 		
 		
-	}, {dependencies: [fontsReady], revertOnUpdate: true})
+	}, {dependencies: [fontsReady, hypeX, hypeY], revertOnUpdate: true})
 	
 	return (
 		<section id="intro" className={"relative w-full h-[300vh]"}>
 			<div
 				id="intro-stage"
-				className={"top-0 h-dvh overflow-hidden"}
+				className={"relative top-0 h-dvh overflow-hidden"}
 			>
 				<div
 					id="bg-layer"
-					className="absolute inset-0 scale-105 bg-no-repeat bg-cover bg-bottom-right "
+					className="absolute inset-0 scale-105 bg-no-repeat bg-cover bg-bottom-right"
 					style={{backgroundImage: `url(${cutting_mat})`}}
 				/>
 				<IntroCard/>

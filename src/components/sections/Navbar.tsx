@@ -95,7 +95,7 @@ export const Navbar = () => {
 						
 						<div className="sm:absolute top-6 md:top-8 lg:top-10 w-full">
 							<a ref={wordmarkRef} onClick={(e) => handleNavClick(e, "#intro")} href="#intro"
-							   className="block w-full will-change-transform">
+							   className="block w-full">
 								<Wordmark/>
 							</a>
 						</div>
