@@ -25,7 +25,7 @@ const AnimatedCork = () => {
 			})
 			.to(corkRef.current.rotation, {
 				x: Math.PI / 2,
-				y: -Math.PI * 2,
+				y: -Math.PI / 2,
 				duration: 1,
 			}, "<30%")
 			.to(corkRef.current.rotation, {

@@ -124,7 +124,7 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent !important;
+    background: inherit !important;
 }
 
 ::-webkit-scrollbar-thumb {
