@@ -195,6 +195,7 @@ export const Intro = () => {
 				stagger: 0.1,
 				scale: 1.1,
 				filter: "blur(10px)",
+				ease: "power2.out"
 			})
 			.from(korvoOne.chars, {
 				yPercent: 100,
@@ -208,8 +209,8 @@ export const Intro = () => {
 			
 			.from(aiCooked.lines, {
 				yPercent: 100,
-				stagger: 0.15,
-				duration: 2
+				stagger: 2,
+				duration: 8
 			}, "<")
 		
 		
