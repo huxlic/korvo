@@ -20,7 +20,7 @@ const App = () => {
 	}, [])
 	
 	return (
-		<div className="w-full font-work-sans text-warm-cream selection:bg-ember-accent">
+		<div className="w-full font-work-sans text-warm-cream selection:bg-ember-accent select-none">
 			<Navbar/>
 			<div
 				id="smooth-wrapper"
