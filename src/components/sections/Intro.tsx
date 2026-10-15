@@ -35,7 +35,7 @@ export const Intro = () => {
 				end: "bottom bottom",
 				pin: "#intro-stage",
 				pinSpacing: false,
-				scrub: 1,
+				scrub: 0.5,
 				onEnter: () => setActiveSection("intro")
 			}
 		});
@@ -83,10 +83,6 @@ export const Intro = () => {
 		})
 		
 		tl
-			.to("#canvas", {
-				backgroundColor: "#1A1513",
-				backdropFilter: "blur(4px)"
-			})
 			
 			.to("#bg-layer", {
 				scale: 0.3,
@@ -97,14 +93,25 @@ export const Intro = () => {
 					start: "top top",
 					scrub: true,
 				},
-			}, "<")
+			})
+			
+			.to("#canvas", {
+				backgroundColor: "#1A1513",
+				backdropFilter: "blur(4px)",
+				duration: 4
+			}, "<100%")
 			
 			.to(introCopy.lines, {
-				x: 40,
-				filter: "blur(8px)",
-				opacity: 0,
-				stagger: 0.05
+				xPercent: 5,
+				filter: "blur(10px)",
+				// opacity: 0,
+				stagger: 0.05,
 			}, "<")
+			.to(introCopy.lines, {
+				// xPercent: 10,
+				opacity: 0,
+				stagger: 0.05,
+			}, "<30%")
 			
 			.to(introCardHeader.lines, {
 				yPercent: 100,
@@ -131,9 +138,9 @@ export const Intro = () => {
 				display: "none",
 			})
 			
-			.to(introCopy.elements, {
-				display: "none"
-			})
+			// .to(introCopy.elements, {
+			// 	display: "none"
+			// })
 			
 			.to(hypeTitle.chars, {
 				opacity: 1,
@@ -192,10 +199,10 @@ export const Intro = () => {
 			})
 			.from(poweredByAi.chars, {
 				opacity: 0,
-				stagger: 0.1,
+				stagger: 0.25,
 				scale: 1.1,
-				filter: "blur(10px)",
-				ease: "power2.out"
+				filter: "blur(8px)",
+				duration: 1
 			})
 			.from(korvoOne.chars, {
 				yPercent: 100,

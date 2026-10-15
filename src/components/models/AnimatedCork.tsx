@@ -16,29 +16,36 @@ const AnimatedCork = () => {
 				scrub: 1,
 			},
 		});
+		const cork = corkRef.current;
 		
-		tl.to(corkRef.current.scale, {
-				x: 0.5,
-				y: 0.5,
-				z: 0.5,
-				duration: 1,
-			})
-			.to(corkRef.current.rotation, {
-				x: Math.PI / 2,
-				y: -Math.PI / 2,
-				duration: 1,
-			}, "<30%")
-			.to(corkRef.current.rotation, {
-				x: 0,
-				y: -Math.PI * 2,
-				duration: 1,
-			})
-			.to(corkRef.current.scale, {
-				x: 0.24,
-				y: 0.24,
-				z: 0.24,
-				duration: 1,
-			});
+		// tl.to(corkRef.current.scale, {
+		// 		x: 0.5,
+		// 		y: 0.5,
+		// 		z: 0.5,
+		// 		duration: 1,
+		// 	})
+		// 	.to(corkRef.current.rotation, {
+		// 		x: -Math.PI,
+		// 		y: -Math.PI,
+		// 		duration: 1,
+		// 	}, "<50%")
+		// 	.to(corkRef.current.rotation, {
+		// 		x: 0,
+		// 		y: -Math.PI * 2,
+		// 		duration: 1,
+		// 	})
+		// 	.to(corkRef.current.scale, {
+		// 		x: 0.24,
+		// 		y: 0.24,
+		// 		z: 0.24,
+		// 		duration: 1,
+		// 	});
+		
+		tl.to(cork.scale,    { x: 0.5,  y: 0.5,  z: 0.5,  duration: 1 })       // grow toward camera
+			.to(cork.rotation, { y: -Math.PI, x: 0, duration: 1 }, "<40%")                // A: Y half-turn, back face shows
+			.to(cork.rotation, { x: -Math.PI, duration: 1 })                     // B: X half-turn, cup returns
+			.to(cork.scale,    { x: 0.24, y: 0.24, z: 0.24, duration: 1.4 })
+		
 	}, []);
 	
 	return (

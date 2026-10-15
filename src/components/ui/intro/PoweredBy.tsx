@@ -15,7 +15,7 @@ const PoweredBy = () => {
 			</div>
 			
 			<p id="ai-cooked"
-			   className={"w-full font-semibold uppercase tracking-tighter leading-7.5 md:leading-3.5 lg:leading-5 text-[28px] md:text-[13px] lg:text-[16px] text-start md:text-end"}>
+			   className={"w-full font-semibold uppercase tracking-tighter leading-7.5 md:leading-3.5 lg:leading-4.5 text-[28px] md:text-[13px] lg:text-[16px] text-start md:text-end"}>
 				We asked for a coaster.<br/>
 				AI pitched a platform.<br/>
 				Seed round closed.
