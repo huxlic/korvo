@@ -119,7 +119,8 @@ export const Intro = () => {
 					each: 0.05,
 					from: "end"
 				},
-				ease: "circ.in"
+				ease: "circ.in",
+				duration: 2
 			}, "<")
 			.to(introCardDesc.lines, {
 				yPercent: 100,
@@ -128,19 +129,19 @@ export const Intro = () => {
 					from: "end"
 				},
 				ease: "circ.in",
+				duration: 2
 			}, "<")
 			.to("#dashline", {
 				width: 0,
-				ease: "circ.in"
+				ease: "circ.in",
+				duration: 2
 			}, "<")
 			.to("#intro-card", {
 				opacity: 0,
 				display: "none",
-			})
-			
-			// .to(introCopy.elements, {
-			// 	display: "none"
-			// })
+				duration: 2,
+				delay: 1
+			}, "<80%")
 			
 			.to(hypeTitle.chars, {
 				opacity: 1,
