@@ -1,7 +1,6 @@
 import {Canvas} from "@react-three/fiber";
 import cutting_mat from "../../assets/images/cutting_table.jpg";
 import gsap from "gsap";
-import AnimatedCork from "../models/AnimatedCork.tsx";
 import {useGSAP} from "@gsap/react";
 import {SplitText} from "gsap/SplitText";
 import useNavStore from "../../store/useNavStore.ts";
@@ -11,9 +10,14 @@ import IntroContent from "../ui/intro/IntroContent.tsx";
 import Drive from "../ui/intro/Drive.tsx";
 import PoweredBy from "../ui/intro/PoweredBy.tsx";
 import {useMediaQuery} from "react-responsive";
+import * as THREE from "three";
+import Cork from "../models/Cork.tsx";
 
 export const Intro = () => {
 	const {setActiveSection} = useNavStore();
+	
+	const [cork, setCork] = useState<THREE.Group | null>(null);
+	
 	const [fontsReady, setFontsReady] = useState(false);
 	const isMdUp = useMediaQuery({minWidth: 768});
 	
@@ -22,23 +26,14 @@ export const Intro = () => {
 		);
 	}, []);
 	
-	const hypeX = isMdUp ? 0 : 40;
-	const hypeY = isMdUp ? 40 : 0;
+	const hypeX = isMdUp ? 0 : 50;
+	const hypeY = isMdUp ? 50 : 0;
+	
 	
 	useGSAP(() => {
-		if (!fontsReady) return;
-		
-		const tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: "#intro",
-				start: "top top",
-				end: "bottom bottom",
-				pin: "#intro-stage",
-				pinSpacing: false,
-				scrub: 1,
-				onEnter: () => setActiveSection("intro")
-			}
-		});
+		if (!fontsReady || !cork) return;
+		// cork.rotation.order = "YXZ";
+		// setCork(cork.rotation.order = "YXZ")
 		
 		const introCopy = SplitText.create("#intro-copy", {
 			type: "lines",
@@ -69,42 +64,43 @@ export const Intro = () => {
 			type: "words, chars",
 			
 		})
-		
 		const korvoOne = SplitText.create("#korvo-1", {
 			type: "chars",
 			charsClass: "inline-block",
 			mask: "lines"
 		})
-		
 		const aiCooked = SplitText.create("#ai-cooked", {
 			type: "lines",
 			charsClass: "w-full block",
 			mask: "lines"
 		})
 		
+		const tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: "#intro",
+				start: "top top",
+				end: "bottom bottom",
+				pin: "#intro-stage",
+				pinSpacing: false,
+				scrub: 0.5,
+				onEnter: () => setActiveSection("intro")
+			}
+		});
 		tl
-			.to("#canvas", {
-				backgroundColor: "#1A1513",
-				backdropFilter: "blur(4px)"
-			})
-			
 			.to("#bg-layer", {
 				scale: 0.3,
-				rotation: 20,
+				rotation: 25,
 				ease: "none",
 				scrollTrigger: {
 					trigger: "#intro",
 					start: "top top",
 					scrub: true,
 				},
-			}, "<")
+			})
+			.to(cork.scale, {x: 0.5, y: 0.5, z: 0.5, duration: 8}, "<")
 			
-			.to(introCopy.lines, {
-				x: 40,
-				filter: "blur(8px)",
-				opacity: 0,
-				stagger: 0.05
-			}, "<")
+			.to("#canvas", {backgroundColor: "#1A1513", backdropFilter: "blur(4px)", duration: 4}, "<")
+			.to(introCopy.lines, {xPercent: 5, filter: "blur(10px)", opacity: 0, duration: 1.5, stagger: 0.2,}, "<")
 			
 			.to(introCardHeader.lines, {
 				yPercent: 100,
@@ -112,7 +108,8 @@ export const Intro = () => {
 					each: 0.05,
 					from: "end"
 				},
-				ease: "circ.in"
+				ease: "circ.in",
+				duration: 2
 			}, "<")
 			.to(introCardDesc.lines, {
 				yPercent: 100,
@@ -121,100 +118,57 @@ export const Intro = () => {
 					from: "end"
 				},
 				ease: "circ.in",
-			}, "<")
-			.to("#dashline", {
-				width: 0,
-				ease: "circ.in"
-			}, "<")
-			.to("#intro-card", {
-				opacity: 0,
-				display: "none",
-			})
-			
-			.to(introCopy.elements, {
-				display: "none"
-			})
-			
-			.to(hypeTitle.chars, {
-				opacity: 1,
-				stagger: {
-					each: 0.25,
-					from: "end"
-				},
-				ease: "circ.in",
 				duration: 2
-			}, "sync")
-			.to(hypeDesc.chars, {
-				opacity: 1,
-				stagger: 0.05,
-				ease: "circ.in",
-				duration: 2
-			}, "sync")
+			}, "<")
+			.to("#dashline", {width: 0, ease: "circ.in", duration: 2}, "<")
+			.to("#intro-card", {opacity: 0, display: "none", duration: 1, delay: 1}, "<80%")
 			
-			.from("#hype-title", {
-				yPercent: -hypeY,
-				xPercent: hypeX,
-				ease: "circ.inOut",
-				duration: 8
-			}, "<")
-			.from("#hype-desc", {
-				yPercent: hypeY,
-				xPercent: -hypeX,
-				ease: "circ.inOut",
-				duration: 8
-			}, "<")
+			.to(hypeTitle.chars, {opacity: 1, stagger: {each: 0.25, from: "end"}, ease: "circ.in", duration: 2}, "<")
+			.to(hypeDesc.chars, {opacity: 1, stagger: 0.05, ease: "circ.in", duration: 2}, "<")
+			.addLabel("flipA", "<")
 			
-			.from("#drive-dash", {
-				xPercent: 100,
-				duration: 8
-			})
-			.from("#drive", {
-				opacity: 0,
-				duration: 8
-			}, "<")
+			.from("#hype-title", {yPercent: -hypeY, xPercent: hypeX, ease: "circ.inOut", duration: 8}, "<")
+			.from("#hype-desc", {yPercent: hypeY, xPercent: -hypeX, ease: "circ.inOut", duration: 8}, "<")
 			
-			.to("#hype-title", {
-				opacity: 0,
-				yPercent: hypeY,
-				xPercent: -hypeX,
-				ease: "circ.inOut",
-				duration: 8
-			}, "+=2")
-			.to("#hype-desc", {
-				opacity: 0,
-				yPercent: -hypeY,
-				xPercent: hypeX,
-				ease: "circ.inOut",
-				duration: 8
-			}, "<")
-			.to("#canvas", {
-				backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"
-			})
-			.from(poweredByAi.chars, {
-				opacity: 0,
-				stagger: 0.1,
-				scale: 1.1,
-				filter: "blur(10px)",
-				ease: "power2.out"
-			})
-			.from(korvoOne.chars, {
-				yPercent: 100,
-				stagger: 0.08,
-			}, "<20%")
-			.from("#asterisk", {
-				scale: 0,
-				duration: 2,
-				ease: "circ.out"
-			})
+			.from("#drive-dash", {xPercent: 100, duration: 8})
+			.from("#drive", {opacity: 0, duration: 8}, "<")
 			
-			.from(aiCooked.lines, {
-				yPercent: 100,
-				stagger: 2,
-				duration: 8
-			}, "<")
+			.to("#hype-title", {opacity: 0, yPercent: hypeY, xPercent: -hypeX, ease: "circ.inOut", duration: 8}, "+=1")
+			.to("#hype-desc", {opacity: 0, yPercent: -hypeY, xPercent: hypeX, ease: "circ.inOut", duration: 8}, "<")
+			.addLabel("flipB", ">")
+			
+			.to("#canvas", {backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"})
+			// .addLabel("poweredBy")
+			.from(poweredByAi.chars, {opacity: 0, stagger: 0.25, scale: 1.1, filter: "blur(8px)", duration: 1})
+			
+			.from(korvoOne.chars, {yPercent: 100, stagger: 0.08,}, "<20%")
+			.from("#asterisk", {scale: 0, duration: 2, ease: "circ.out"})
+			
+			.from(aiCooked.lines, {yPercent: 100, stagger: 2, duration: 8}, "<")
 		
+		const {flipA, flipB} = tl.labels;
+		const aLen = flipB - flipA;
+		const bLen = 8;
 		
-	}, {dependencies: [fontsReady, hypeX, hypeY], revertOnUpdate: true})
+		tl.to(cork.rotation, {y: -Math.PI, duration: aLen, ease: "power1.inOut"}, "flipA")
+			.to(cork.rotation, {
+				x: -Math.PI / 3,
+				duration: aLen / 2,
+				repeat: 1,
+				yoyo: true,
+				ease: "sine.inOut"
+			}, "flipA")
+			.to(cork.rotation, {x: Math.PI, duration: bLen, ease: "power1.inOut"}, "flipB")
+			.to(cork.scale, {x: 0.4, y: 0.4, z: 0.4, duration: bLen, ease: "power1.inOut"}, "<")
+			.to(cork.scale, {
+				x: 0.24,
+				y: 0.24,
+				z: 0.24,
+				duration: 6,
+				ease: "power1.inOut"
+			}, ">");
+		
+	}, {dependencies: [fontsReady, cork, hypeX, hypeY], revertOnUpdate: true})
 	
 	return (
 		<section id="intro" className={"relative w-full h-[300vh]"}>
@@ -236,7 +190,8 @@ export const Intro = () => {
 					<Canvas camera={{position: [0, 0, 8], fov: 50}}>
 						<ambientLight intensity={1.5}/>
 						<directionalLight position={[3, 5, 2]} intensity={5}/>
-						<AnimatedCork/>
+						<Cork ref={setCork} scale={0.32} rotation={[0, 0, 0]}/>
+						{/*<AnimatedCork/>*/}
 					</Canvas>
 				</div>
 			</div>
