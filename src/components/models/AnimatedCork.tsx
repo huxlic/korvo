@@ -19,13 +19,12 @@ const AnimatedCork = () => {
 		const cork = corkRef.current;
 		cork.rotation.order = "YXZ";
 		
-		const TILT = -Math.PI / 6;   // ~30° lean, which is roughly what the video shows
+		const TILT = -Math.PI / 6;   // ~30° lean
 		
 		tl.to(cork.scale,    { x: 0.5, y: 0.5, z: 0.5, duration: 2 })
 			.to(cork.rotation, { y: -Math.PI, duration: 1 }, "<20%")                 // A: Y half-turn
-			.to(cork.rotation, { x: TILT, duration: 0.5, repeat: 1, yoyo: true,
-				ease: "power1.inOut" }, "<")                        // lean in, then back to 0
-			.to(cork.rotation, { x: -Math.PI, duration: 1 })                         // B: tip over
+			.to(cork.rotation, { x: TILT, duration: 0.5, repeat: 1, yoyo: true, }, "<")                        // lean in, then back to 0
+			.to(cork.rotation, { x: Math.PI, duration: 1 })
 			.to(cork.scale,    { x: 0.24, y: 0.24, z: 0.24, duration: 1.4 });
 		
 	}, []);
