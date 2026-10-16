@@ -32,6 +32,8 @@ export const Intro = () => {
 	
 	useGSAP(() => {
 		if (!fontsReady || !cork) return;
+		// cork.rotation.order = "YXZ";
+		// setCork(cork.rotation.order = "YXZ")
 		
 		const introCopy = SplitText.create("#intro-copy", {
 			type: "lines",
@@ -87,7 +89,7 @@ export const Intro = () => {
 		tl
 			.to("#bg-layer", {
 				scale: 0.3,
-				rotation: 20,
+				rotation: 25,
 				ease: "none",
 				scrollTrigger: {
 					trigger: "#intro",
@@ -95,7 +97,7 @@ export const Intro = () => {
 					scrub: true,
 				},
 			})
-			.to(cork.scale, {x: 0.5, y: 0.5, z: 0.5, duration: 8}, "cork")
+			.to(cork.scale, {x: 0.5, y: 0.5, z: 0.5, duration: 8}, "<")
 			
 			.to("#canvas", {backgroundColor: "#1A1513", backdropFilter: "blur(4px)", duration: 4}, "<")
 			.to(introCopy.lines, {xPercent: 5, filter: "blur(10px)", opacity: 0, duration: 1.5, stagger: 0.2,}, "<")
@@ -124,12 +126,9 @@ export const Intro = () => {
 			.to(hypeTitle.chars, {opacity: 1, stagger: {each: 0.25, from: "end"}, ease: "circ.in", duration: 2}, "sync")
 			.to(hypeDesc.chars, {opacity: 1, stagger: 0.05, ease: "circ.in", duration: 2}, "sync")
 			
-			.to(cork.rotation, {y: -Math.PI, duration: 8}, "<cork")
-			.to(cork.rotation, { x: -Math.PI / 3, duration: 0.5, repeat: 1, yoyo: true, })
-			.to(cork.rotation, { x: Math.PI, duration: 1 })
-			
 			.from("#hype-title", {yPercent: -hypeY, xPercent: hypeX, ease: "circ.inOut", duration: 8}, "<")
 			.from("#hype-desc", {yPercent: hypeY, xPercent: -hypeX, ease: "circ.inOut", duration: 8}, "<")
+			.addLabel("flipB")
 			
 			.from("#drive-dash", {xPercent: 100, duration: 8})
 			.from("#drive", {opacity: 0, duration: 8}, "<")
@@ -139,12 +138,15 @@ export const Intro = () => {
 			.to("#canvas", {backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"})
 			.from(poweredByAi.chars, {opacity: 0, stagger: 0.25, scale: 1.1, filter: "blur(8px)", duration: 1})
 			
-			.to(cork.scale,    { x: 0.24, y: 0.24, z: 0.24, duration: 8 }, "cork")
-			
 			.from(korvoOne.chars, {yPercent: 100, stagger: 0.08,}, "<20%")
 			.from("#asterisk", {scale: 0, duration: 2, ease: "circ.out"})
 			
 			.from(aiCooked.lines, {yPercent: 100, stagger: 2, duration: 8}, "<")
+			
+			.to(cork.rotation, {y: -Math.PI, duration: 8, ease: "power1.inOut"}, "sync")
+			.to(cork.rotation, {x: -Math.PI / 6, duration: 4, repeat: 1, yoyo: true, ease: "sine.inOut"}, "sync")
+			.to(cork.rotation, {x: Math.PI, duration: 8, ease: "power1.inOut"}, "flipB")
+			.to(cork.scale, {x: 0.24, y: 0.24, z: 0.24, duration: 10, ease: "power1.inOut"}, "flipB")
 		
 		
 	}, {dependencies: [fontsReady, cork, hypeX, hypeY], revertOnUpdate: true})
