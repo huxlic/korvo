@@ -125,6 +125,7 @@ export const Intro = () => {
 			
 			.to(hypeTitle.chars, {opacity: 1, stagger: {each: 0.25, from: "end"}, ease: "circ.in", duration: 2}, "<")
 			.to(hypeDesc.chars, {opacity: 1, stagger: 0.05, ease: "circ.in", duration: 2}, "<")
+			.addLabel("flipA", "<")
 			
 			.from("#hype-title", {yPercent: -hypeY, xPercent: hypeX, ease: "circ.inOut", duration: 8}, "<")
 			.from("#hype-desc", {yPercent: hypeY, xPercent: -hypeX, ease: "circ.inOut", duration: 8}, "<")
@@ -134,20 +135,38 @@ export const Intro = () => {
 			
 			.to("#hype-title", {opacity: 0, yPercent: hypeY, xPercent: -hypeX, ease: "circ.inOut", duration: 8}, "+=1")
 			.to("#hype-desc", {opacity: 0, yPercent: -hypeY, xPercent: hypeX, ease: "circ.inOut", duration: 8}, "<")
+			.addLabel("flipB", ">")
+			
 			.to("#canvas", {backgroundImage: "linear-gradient(212deg, #1a1513 67%, #3c2010 100%)"})
-			.addLabel("flipB")
+			// .addLabel("poweredBy")
 			.from(poweredByAi.chars, {opacity: 0, stagger: 0.25, scale: 1.1, filter: "blur(8px)", duration: 1})
 			
 			.from(korvoOne.chars, {yPercent: 100, stagger: 0.08,}, "<20%")
 			.from("#asterisk", {scale: 0, duration: 2, ease: "circ.out"})
 			
 			.from(aiCooked.lines, {yPercent: 100, stagger: 2, duration: 8}, "<")
-			
-			.to(cork.rotation, {y: -Math.PI, duration: 10, ease: "power1.inOut"}, "sync")
-			.to(cork.rotation, {x: -Math.PI / 6, duration: 4, repeat: 1, yoyo: true, ease: "sine.inOut"}, "sync")
-			.to(cork.rotation, {x: Math.PI, duration: 10, ease: "power1.inOut"}, "flipB")
-			.to(cork.scale, {x: 0.24, y: 0.24, z: 0.24, duration: 10, ease: "power1.inOut"}, "flipB")
 		
+		const {flipA, flipB} = tl.labels;
+		const aLen = flipB - flipA;
+		const bLen = 8;
+		
+		tl.to(cork.rotation, {y: -Math.PI, duration: aLen, ease: "power1.inOut"}, "flipA")
+			.to(cork.rotation, {
+				x: -Math.PI / 3,
+				duration: aLen / 2,
+				repeat: 1,
+				yoyo: true,
+				ease: "sine.inOut"
+			}, "flipA")
+			.to(cork.rotation, {x: Math.PI, duration: bLen, ease: "power1.inOut"}, "flipB")
+			.to(cork.scale, {x: 0.4, y: 0.4, z: 0.4, duration: bLen, ease: "power1.inOut"}, "<")
+			.to(cork.scale, {
+				x: 0.24,
+				y: 0.24,
+				z: 0.24,
+				duration: 6,
+				ease: "power1.inOut"
+			}, ">");
 		
 	}, {dependencies: [fontsReady, cork, hypeX, hypeY], revertOnUpdate: true})
 	
