@@ -104,14 +104,10 @@ export const Intro = () => {
 			.to(introCopy.lines, {
 				xPercent: 5,
 				filter: "blur(10px)",
-				// opacity: 0,
-				stagger: 0.05,
-			}, "<")
-			.to(introCopy.lines, {
-				// xPercent: 10,
 				opacity: 0,
-				stagger: 0.05,
-			}, "<30%")
+				duration: 1.5,
+				stagger: 0.2,
+			}, "<")
 			
 			.to(introCardHeader.lines, {
 				yPercent: 100,
